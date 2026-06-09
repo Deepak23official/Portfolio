@@ -1,0 +1,1777 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deepak M | Junior Web Developer Portfolio</title>
+    <meta name="description" content="Premium 3D Portfolio of Deepak M, B.Sc Computer Science graduate, detailing career growth from Jio NOC Engineer to Hana Soft AI Solutions Junior Web Developer.">
+    <meta name="keywords" content="Deepak M, Junior Web Developer, Hana Soft, Jio NOC, Portfolio, B.Sc Computer Science, HTML, CSS, JavaScript, Tailwind CSS">
+    
+    <!-- Open Graph Metas -->
+    <meta property="og:title" content="Deepak M | 3D Web Developer Portfolio">
+    <meta property="og:description" content="Explore the premium 3D, responsive web experiences designed by Deepak M.">
+    <meta property="og:type" content="website">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        darkBg: '#FFFDFB',       // warm cream/off-white base background
+                        darkPanel: '#FFFFFF',    // white card background
+                        mintGlow: '#FF4500',     // primary neon accent: Orangered
+                        cyberBlue: '#FF7F50',    // secondary accent: Coral
+                        creamText: '#2D1E19',    // high-contrast dark charcoal text for body
+                        slateGray: '#5C524E',    // secondary slate grey text
+                    },
+                    fontFamily: {
+                        sans: ['Poppins', 'sans-serif'],
+                        display: ['Poppins', 'sans-serif'],
+                    },
+                    animation: {
+                        'float-slow': 'floatSlow 8s ease-in-out infinite',
+                        'float-medium': 'floatSlow 5s ease-in-out infinite',
+                        'pulse-glow': 'pulseGlow 6s ease-in-out infinite',
+                        'spin-slow': 'spin 20s linear infinite',
+                    },
+                    keyframes: {
+                        floatSlow: {
+                            '0%, 100%': { transform: 'translateY(0px) rotate(0deg)' },
+                            '50%': { transform: 'translateY(-15px) rotate(1.5deg)' },
+                        },
+                        pulseGlow: {
+                            '0%, 100%': { opacity: 0.1, transform: 'scale(1)' },
+                            '50%': { opacity: 0.25, transform: 'scale(1.08)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Google Fonts: Poppins (Geometric clean text body) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@350;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <!-- FontAwesome & Lucide Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        /* Custom scrollbar matching orangered palette */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #FFFDFB;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(255, 69, 0, 0.2);
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #FF4500;
+        }
+
+        /* 3D Perspective settings for containers */
+        .perspective-container {
+            perspective: 1000px;
+        }
+        
+        .preserve-3d {
+            transform-style: preserve-3d;
+        }
+
+        /* Glassmorphism Panel styles with depth shadow layers */
+        .glass-panel-3d {
+            background: rgba(255, 255, 255, 0.75);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 69, 0, 0.08);
+            box-shadow: 0 15px 35px rgba(255, 69, 0, 0.04), 
+                        inset 0 1px 0 rgba(255, 255, 255, 0.6);
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        .glass-panel-3d:hover {
+            border-color: rgba(255, 69, 0, 0.25);
+            box-shadow: 0 20px 40px rgba(255, 69, 0, 0.08), 
+                        inset 0 1px 0 rgba(255, 255, 255, 0.8);
+        }
+
+        /* 3D Hover lift dynamics */
+        .hover-lift-3d {
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), 
+                        box-shadow 0.3s ease;
+        }
+        .hover-lift-3d:hover {
+            transform: translateY(-8px) rotateX(4deg) rotateY(-2deg);
+            box-shadow: 0 20px 40px rgba(255, 69, 0, 0.1);
+        }
+
+        /* Scroll reveal indicators styling */
+        .reveal-node {
+            opacity: 0;
+            transform: translateY(40px) scale(0.97);
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), 
+                        transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .reveal-node.active {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+
+
+        /* Custom link interactive bars */
+        .nav-link {
+            position: relative;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0%;
+            height: 2px;
+            bottom: -4px;
+            left: 50%;
+            background-color: #FF4500;
+            transition: width 0.3s ease, left 0.3s ease;
+        }
+        .nav-link:hover::after, .nav-link.active-nav::after {
+            width: 100%;
+            left: 0;
+        }
+
+        /* CSS-Only 3D Cube animation styles */
+        .cube-container {
+            width: 80px;
+            height: 80px;
+            position: relative;
+            transform-style: preserve-3d;
+            animation: rotateCube 12s infinite linear;
+        }
+        .cube-face {
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            background: rgba(255, 69, 0, 0.06);
+            border: 1px solid rgba(255, 69, 0, 0.3);
+            box-shadow: 0 0 15px rgba(255, 69, 0, 0.05);
+        }
+        .face-front  { transform: rotateY(0deg) translateZ(40px); }
+        .face-back   { transform: rotateY(180deg) translateZ(40px); }
+        .face-left   { transform: rotateY(-90deg) translateZ(40px); }
+        .face-right  { transform: rotateY(90deg) translateZ(40px); }
+        .face-top    { transform: rotateX(90deg) translateZ(40px); }
+        .face-bottom { transform: rotateX(-90deg) translateZ(40px); }
+
+        @keyframes rotateCube {
+            0% { transform: rotateX(0deg) rotateY(0deg); }
+            100% { transform: rotateX(360deg) rotateY(360deg); }
+        }
+
+        /* 3D Sphere shadows styling */
+        .sphere-3d {
+            background: radial-gradient(circle at 30% 30%, #FF7F50, #FF4500 70%, #CC3700 100%);
+            box-shadow: inset -10px -10px 30px rgba(0, 0, 0, 0.15), 
+                        10px 20px 30px rgba(255, 69, 0, 0.1);
+        }
+
+        .sphere-blue-3d {
+            background: radial-gradient(circle at 30% 30%, #FFA07A, #FF6347 70%, #CD5C5C 100%);
+            box-shadow: inset -10px -10px 30px rgba(0, 0, 0, 0.15), 
+                        10px 20px 30px rgba(255, 69, 0, 0.1);
+        }
+
+        /* Outlined typography */
+        .text-stroke-accent {
+            -webkit-text-stroke: 1.5px #FF4500;
+            color: transparent;
+        }
+        .text-stroke-white {
+            -webkit-text-stroke: 1.5px rgba(255, 69, 0, 0.25);
+            color: transparent;
+        }
+
+    </style>
+</head>
+<body class="bg-gradient-to-tr from-[#FFFDFB] via-[#FFF5F2] to-[#FFEBE5] text-creamText font-sans selection:bg-mintGlow selection:text-white overflow-x-hidden relative min-h-screen">
+
+    <!-- 3D Layered Background elements -->
+    <div class="absolute inset-0 overflow-hidden pointer-events-none -z-50 min-h-screen">
+        <!-- Radial Glow spots -->
+        <div class="absolute top-[10%] left-[-10%] w-[50%] aspect-square rounded-full bg-mintGlow/5 blur-[130px] animate-pulse-glow"></div>
+        <div class="absolute top-[50%] right-[-10%] w-[45%] aspect-square rounded-full bg-cyberBlue/4 blur-[150px] animate-float-slow"></div>
+
+        <!-- Floating Abstract 3D Shapes -->
+        <!-- Sphere OrangeRed -->
+        <div class="absolute top-[25%] right-[12%] w-20 h-20 rounded-full sphere-3d animate-float-slow opacity-60"></div>
+        <!-- Sphere Light Coral -->
+        <div class="absolute bottom-[30%] left-[8%] w-16 h-16 rounded-full sphere-blue-3d animate-float-slow opacity-40"></div>
+        
+        <!-- 3D CSS Cube -->
+        <div class="absolute top-[65%] right-[10%] opacity-40">
+            <div class="cube-container">
+                <div class="cube-face face-front"></div>
+                <div class="cube-face face-back"></div>
+                <div class="cube-face face-left"></div>
+                <div class="cube-face face-right"></div>
+                <div class="cube-face face-top"></div>
+                <div class="cube-face face-bottom"></div>
+            </div>
+        </div>
+        <!-- Floating Glass Torus style ring -->
+        <div class="absolute top-[45%] left-[12%] w-28 h-28 rounded-full border-[8px] border-mintGlow/5 shadow-2xl backdrop-blur-[1px] animate-float-slow opacity-40"></div>
+    </div>
+
+    <!-- 1. Sticky Nav Header -->
+    <header class="fixed top-0 left-0 w-full z-50 transition-all duration-300 border-b border-transparent bg-transparent" id="site-header">
+        <nav class="max-w-7xl mx-auto px-8 h-24 flex items-center justify-between font-display font-semibold text-xs tracking-widest uppercase">
+            
+            <!-- Branding -->
+            <a href="#home" class="flex items-center gap-3 group">
+                <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-mintGlow to-cyberBlue flex items-center justify-center shadow-lg group-hover:scale-105 transition-transform duration-300">
+                    <i data-lucide="code" class="w-5 h-5 text-white"></i>
+                </div>
+                <span class="font-mono font-bold text-sm text-creamText tracking-tight normal-case transition-colors duration-300 group-hover:text-mintGlow">
+                    &lt;deepak.m<span class="text-mintGlow">/</span>&gt;
+                </span>
+            </a>
+
+            <!-- Desktop Links -->
+            <div class="hidden lg:flex items-center gap-8 text-slateGray">
+                <a href="#home" class="nav-link transition-colors duration-300 hover:text-mintGlow py-1">Home</a>
+                <a href="#about" class="nav-link transition-colors duration-300 hover:text-mintGlow py-1">About</a>
+                <a href="#experience" class="nav-link transition-colors duration-300 hover:text-mintGlow py-1">Experience</a>
+                <a href="#skills" class="nav-link transition-colors duration-300 hover:text-mintGlow py-1">Skills</a>
+                <a href="#projects" class="nav-link transition-colors duration-300 hover:text-mintGlow py-1">Projects</a>
+                <a href="#services" class="nav-link transition-colors duration-300 hover:text-mintGlow py-1">Services</a>
+                <a href="#contact" class="nav-link transition-colors duration-300 hover:text-mintGlow py-1">Contact</a>
+            </div>
+
+            <!-- Outline CV button -->
+            <div class="hidden lg:block">
+                <button onclick="triggerResumeModal()" class="relative group px-6 py-2.5 rounded-full overflow-hidden bg-white/40 border border-mintGlow/20 hover:border-mintGlow shadow-lg transition-all duration-300">
+                    <span class="relative z-10 flex items-center gap-2 text-creamText group-hover:text-mintGlow transition-colors duration-300 text-[10px] font-bold uppercase tracking-widest">
+                        <i data-lucide="download" class="w-3.5 h-3.5 text-mintGlow"></i> Download CV
+                    </span>
+                    <span class="absolute inset-0 bg-gradient-to-r from-mintGlow/5 to-cyberBlue/5 scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-300"></span>
+                </button>
+            </div>
+
+            <!-- Mobile Drawer Menu Button -->
+            <button class="lg:hidden w-8 h-8 flex flex-col justify-center items-center gap-1.5 focus:outline-none z-50 text-creamText" id="menu-btn" aria-label="Toggle Menu">
+                <span class="w-6 h-0.5 bg-creamText transition-all duration-300" id="hamburger-top"></span>
+                <span class="w-6 h-0.5 bg-creamText transition-all duration-300" id="hamburger-mid"></span>
+                <span class="w-6 h-0.5 bg-creamText transition-all duration-300" id="hamburger-bottom"></span>
+            </button>
+        </nav>
+    </header>
+
+    <!-- Mobile Drawer Overlay Menu -->
+    <div id="mobile-menu" class="fixed inset-0 z-40 bg-white/95 backdrop-blur-2xl translate-x-full transition-transform duration-500 flex flex-col items-center justify-center gap-6 font-display text-sm tracking-widest uppercase text-creamText">
+        <a href="#home" onclick="toggleMobileMenu()" class="hover:text-mintGlow font-semibold">Home</a>
+        <a href="#about" onclick="toggleMobileMenu()" class="hover:text-mintGlow font-semibold">About</a>
+        <a href="#experience" onclick="toggleMobileMenu()" class="hover:text-mintGlow font-semibold">Experience</a>
+        <a href="#skills" onclick="toggleMobileMenu()" class="hover:text-mintGlow font-semibold">Skills</a>
+        <a href="#projects" onclick="toggleMobileMenu()" class="hover:text-mintGlow font-semibold">Projects</a>
+        <a href="#services" onclick="toggleMobileMenu()" class="hover:text-mintGlow font-semibold">Services</a>
+        <a href="#contact" onclick="toggleMobileMenu()" class="hover:text-mintGlow font-semibold">Contact</a>
+        <button onclick="toggleMobileMenu(); triggerResumeModal();" class="mt-4 px-6 py-3 rounded-full bg-gradient-to-r from-mintGlow to-cyberBlue text-white flex items-center gap-2 text-[10px] font-bold tracking-widest shadow-lg">
+            <i data-lucide="download" class="w-3.5 h-3.5"></i> Download CV
+        </button>
+    </div>
+
+    <!-- 2. Hero Section (Typographical Awwwards 3D Style) -->
+    <section id="home" class="min-h-screen pt-40 pb-20 flex items-center relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-8 w-full grid grid-cols-1 lg:grid-cols-12 gap-16 items-center relative z-10">
+            
+            <!-- Left Details Narrative -->
+            <div class="lg:col-span-7 flex flex-col space-y-10 text-left">
+                
+                <!-- Status Badge -->
+                <div class="flex justify-start">
+                    <span class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/80 border border-mintGlow/25 text-[10px] font-bold text-mintGlow tracking-widest uppercase shadow-md animate-pulse-slow">
+                        <span class="w-2 h-2 rounded-full bg-mintGlow animate-ping"></span>
+                        Available for Junior Web Developer Roles
+                    </span>
+                </div>
+
+                <!-- Giant Typographic Headline -->
+                <div class="space-y-6">
+                    <h2 class="text-cyberBlue font-display text-xs md:text-sm font-extrabold tracking-widest uppercase flex items-center gap-2">
+                        <span class="w-6 h-0.5 bg-cyberBlue"></span> Junior Web Developer
+                    </h2>
+                    <h1 class="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-tight leading-[1.05] text-creamText">
+                        Hi, this is <br>
+                        <span class="text-gradient bg-clip-text text-transparent bg-gradient-to-r from-mintGlow to-cyberBlue">Deepak.</span>
+                    </h1>
+                    <div class="text-base md:text-lg font-medium text-slateGray tracking-wide">
+                        My current role is <span class="text-mintGlow font-semibold">Jr. Web Developer</span>
+                    </div>
+                </div>
+
+                <!-- Paragraph details -->
+                <p class="text-slateGray max-w-xl text-base md:text-lg font-light leading-relaxed">
+                    B.Sc Computer Science graduate specializing in florist e-commerce custom frontends and visual interfaces. Experienced in catalog migrations, layout responsive checks, and network operations incident tracking.
+                </p>
+
+                <!-- Premium CTA buttons -->
+                <div class="flex flex-col sm:flex-row items-start sm:items-center gap-5 pt-4">
+                    <a href="#projects" class="w-full sm:w-auto px-8 py-4 rounded-full bg-gradient-to-r from-mintGlow to-cyberBlue text-white font-display font-bold text-xs uppercase tracking-widest text-center shadow-lg transition-all duration-300 hover:scale-[1.03] hover:shadow-orange-500/25 hover:shadow-2xl">
+                        Explore Projects
+                    </a>
+                    <a href="#contact" class="w-full sm:w-auto px-8 py-4 rounded-full border border-mintGlow/20 hover:border-mintGlow text-creamText font-display font-bold text-xs uppercase tracking-widest text-center transition-all duration-300 hover:bg-white/40">
+                        Get In Touch
+                    </a>
+                </div>
+
+
+            </div>
+
+            <!-- Right Asymmetric Profile Frame with Floating orbiting Badges -->
+            <div class="lg:col-span-5 flex justify-center items-center relative">
+                
+                <!-- Animated Glowing background circles -->
+                <div class="absolute w-72 h-72 rounded-full border border-mintGlow/10 animate-spin-slow -z-10"></div>
+                <div class="absolute w-80 h-80 rounded-full border border-cyberBlue/10 animate-pulse-glow -z-10"></div>
+
+
+
+                <!-- 3D Profile Frame Container -->
+                <div class="perspective-container preserve-3d">
+                    <div class="tilt-card w-64 h-80 sm:w-72 sm:h-96 rounded-[2.5rem] bg-gradient-to-b from-[#FFFDFB] to-[#FFEBE5] border border-mintGlow/25 p-2 shadow-2xl relative preserve-3d">
+                        <!-- Glass shine layer -->
+                        <div class="absolute inset-0 rounded-[2.5rem] bg-gradient-to-tr from-white/0 via-white/10 to-white/0 pointer-events-none"></div>
+                        
+                        <!-- Avatar placeholder visual -->
+                        <div class="absolute inset-2 rounded-[2.2rem] overflow-hidden bg-gradient-to-b from-[#FFFDFB] to-[#FFEBE5] border border-mintGlow/10 flex flex-col items-center justify-start pt-6 sm:pt-8">
+                            
+                            <!-- Abstract grid background in card -->
+                            <div class="absolute inset-0 opacity-[0.03] bg-[radial-gradient(#FF4500_1px,transparent_1px)] [background-size:10px_10px]"></div>
+                            
+                            <!-- Framed profile image -->
+                            <div class="w-32 h-32 sm:w-40 sm:h-40 rounded-full overflow-hidden border-4 border-white shadow-xl relative bg-white z-10 transition-transform duration-300 hover:scale-105">
+                                <img src="my image.jpg" alt="Deepak M Profile" class="w-full h-full object-cover" onerror="this.style.display='none'; document.getElementById('avatar-fallback').classList.remove('hidden');">
+                                
+                                <!-- Fallback design (neutral silhouette) -->
+                                <div id="avatar-fallback" class="hidden absolute inset-0 bg-gradient-to-tr from-[#FFEBE5] to-[#FFFDFB] flex flex-col items-center justify-center">
+                                    <i data-lucide="user" class="w-12 h-12 text-mintGlow/50"></i>
+                                </div>
+                            </div>
+                            
+                            <!-- Info content to fill empty space -->
+                            <div class="mt-6 text-center space-y-2 z-10 px-4">
+                                <h3 class="text-xl sm:text-2xl font-black text-creamText tracking-tight">Hi, I'm Deepak</h3>
+                                <p class="text-[10px] uppercase font-bold text-mintGlow tracking-widest">Junior Web Developer</p>
+                                
+                                <!-- Tech Icons Row -->
+                                <div class="flex items-center justify-center gap-4 pt-2">
+                                    <i class="fa-brands fa-html5 text-base text-orange-600 cursor-pointer" title="HTML5"></i>
+                                    <i class="fa-brands fa-css3-alt text-base text-[#0066cc] cursor-pointer" title="CSS3"></i>
+                                    <i class="fa-brands fa-js text-base text-yellow-600 cursor-pointer" title="JavaScript"></i>
+                                    <i class="fa-solid fa-wind text-xs text-cyan-500 cursor-pointer" title="Tailwind CSS"></i>
+                                    <i class="fa-solid fa-leaf text-sm text-green-600 cursor-pointer" title="MongoDB"></i>
+                                </div>
+
+                                <!-- Contact number -->
+                                <div class="pt-2 flex items-center justify-center gap-1.5 text-xs text-slateGray font-sans font-medium">
+                                    <i data-lucide="phone" class="w-3.5 h-3.5 text-mintGlow"></i>
+                                    <a href="tel:6374268144" class="hover:text-mintGlow transition-colors">6374268144</a>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <!-- 3D Overlay label pill -->
+                        <div class="absolute -bottom-4 left-6 right-6 py-3 bg-white border border-mintGlow/20 rounded-2xl flex items-center justify-between px-5 z-20 shadow-2xl" style="transform: translateZ(30px);">
+                            <span class="text-[9px] uppercase font-bold text-mintGlow tracking-widest font-display">Developer</span>
+                            <span class="text-[9px] uppercase font-bold text-creamText tracking-wider">B.Sc Comp Science</span>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- 3. About Me Section (Premium Layout split) -->
+    <section id="about" class="py-32 relative overflow-hidden border-t border-mintGlow/5">
+        <div class="max-w-7xl mx-auto px-8 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-16 items-stretch">
+                
+                <!-- Left Solid Accent Column (3D Depth layout) -->
+                <div class="lg:col-span-5 glass-panel-3d p-8 sm:p-12 rounded-[2.5rem] flex flex-col justify-start gap-6 relative overflow-hidden reveal-node">
+                    <div class="absolute -right-20 -bottom-20 w-64 h-64 bg-mintGlow/5 blur-[80px] rounded-full pointer-events-none"></div>
+                    
+                    <div class="space-y-6 relative z-10">
+                        <div class="flex items-center gap-2 text-mintGlow font-display font-extrabold text-[10px] uppercase tracking-widest">
+                            <span class="w-4 h-0.5 bg-mintGlow"></span>
+                            Credentials
+                        </div>
+                        <h3 class="text-3xl font-black leading-tight text-creamText">
+                            Graduated B.Sc in Computer Science.
+                        </h3>
+                        
+                        <!-- Academic details visual blocks -->
+                        <div class="space-y-4 pt-2 text-xs">
+                            <div class="p-4 rounded-2xl bg-white/50 border border-mintGlow/10 flex items-start gap-3.5 shadow-sm hover:border-mintGlow/25 transition-all duration-300">
+                                <div class="w-8 h-8 rounded-lg bg-mintGlow/10 text-mintGlow flex items-center justify-center flex-shrink-0 mt-0.5"><i data-lucide="graduation-cap" class="w-4 h-4"></i></div>
+                                <div class="space-y-0.5">
+                                    <div class="font-bold text-creamText">B.Sc Computer Science</div>
+                                    <div class="text-[10px] text-slateGray leading-relaxed font-light font-sans">Strong foundations in computational databases, visual interface paradigms, systems networking, and data routines.</div>
+                                </div>
+                            </div>
+                            <div class="p-4 rounded-2xl bg-white/50 border border-mintGlow/10 flex items-start gap-3.5 shadow-sm hover:border-mintGlow/25 transition-all duration-300">
+                                <div class="w-8 h-8 rounded-lg bg-mintGlow/10 text-mintGlow flex items-center justify-center flex-shrink-0 mt-0.5"><i data-lucide="briefcase" class="w-4 h-4"></i></div>
+                                <div class="space-y-0.5">
+                                    <div class="font-bold text-creamText">Practical Experience</div>
+                                    <div class="text-[10px] text-slateGray leading-relaxed font-light font-sans">NOC incident telemetry check workflows combined with bulk store inventory visual setup parameters.</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Details Narrative Column -->
+                <div class="lg:col-span-7 flex flex-col justify-between py-2 reveal-node">
+                    
+                    <div class="space-y-6">
+                        <div class="text-[10px] text-mintGlow font-display font-extrabold tracking-widest uppercase flex items-center gap-2">
+                            <span>01 / DETAILED OVERVIEW</span>
+                        </div>
+                        <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-creamText leading-tight">
+                            Bridging data management with clean frontends visual builds.
+                        </h2>
+                        
+                        <!-- Expertise Cards Stack -->
+                        <div class="space-y-4 pt-2">
+                            
+                            <!-- Card 1: Frontend Developer -->
+                            <div class="p-5 rounded-2xl bg-white/60 border border-mintGlow/10 flex flex-col sm:flex-row items-start gap-4 transition-all duration-300 hover:border-mintGlow/30 hover:bg-white/85 shadow-sm group">
+                                <div class="w-10 h-10 rounded-xl bg-mintGlow/10 text-mintGlow flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform"><i data-lucide="layout" class="w-5 h-5 text-mintGlow"></i></div>
+                                <div class="space-y-1">
+                                    <div class="flex items-center gap-2 flex-wrap">
+                                        <span class="font-bold text-sm text-creamText uppercase tracking-wide">Frontend Custom Builds</span>
+                                        <span class="text-[8px] font-bold text-mintGlow bg-mintGlow/10 border border-mintGlow/25 px-2.5 py-0.5 rounded-full uppercase tracking-wider">UI/UX</span>
+                                    </div>
+                                    <p class="text-slateGray text-xs leading-relaxed font-light font-sans">
+                                        Writing clean semantic HTML, securing layout styles, styling visual components directories, configuring shop inventories panels, and performing interface responsiveness audits.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <!-- Card 2: Jio NOC -->
+                            <div class="p-5 rounded-2xl bg-white/60 border border-mintGlow/10 flex flex-col sm:flex-row items-start gap-4 transition-all duration-300 hover:border-mintGlow/30 hover:bg-white/85 shadow-sm group">
+                                <div class="w-10 h-10 rounded-xl bg-mintGlow/10 text-mintGlow flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform"><i data-lucide="activity" class="w-5 h-5 text-mintGlow"></i></div>
+                                <div class="space-y-1">
+                                    <div class="flex items-center gap-2 flex-wrap">
+                                        <span class="font-bold text-sm text-creamText uppercase tracking-wide">NOC Alarm Diagnostics</span>
+                                        <span class="text-[8px] font-bold text-cyberBlue bg-cyberBlue/10 border border-cyberBlue/25 px-2.5 py-0.5 rounded-full uppercase tracking-wider">Telecom</span>
+                                    </div>
+                                    <p class="text-slateGray text-xs leading-relaxed font-light font-sans">
+                                        Monitored active optical transmission alarms, fiber signals levels, and hardware states in telecom operations center. Handled emergency restore logs and incident coordinates.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <!-- Card 3: Hana Soft developer -->
+                            <div class="p-5 rounded-2xl bg-white/60 border border-mintGlow/10 flex flex-col sm:flex-row items-start gap-4 transition-all duration-300 hover:border-mintGlow/30 hover:bg-white/85 shadow-sm group">
+                                <div class="w-10 h-10 rounded-xl bg-mintGlow/10 text-mintGlow flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform"><i data-lucide="database" class="w-5 h-5 text-mintGlow"></i></div>
+                                <div class="space-y-1">
+                                    <div class="flex items-center gap-2 flex-wrap">
+                                        <span class="font-bold text-sm text-creamText uppercase tracking-wide">Store Data Operations</span>
+                                        <span class="text-[8px] font-bold text-green-600 bg-green-500/10 border border-green-500/25 px-2.5 py-0.5 rounded-full uppercase tracking-wider">E-Commerce</span>
+                                    </div>
+                                    <p class="text-slateGray text-xs leading-relaxed font-light font-sans">
+                                        Specializing in store administration setups, catalog bulk data migrations, configuring storefront banner layouts, redesigning shop interfaces, and auditing secure SSL/redirect metrics.
+                                    </p>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- Stats grid with 3D lift -->
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 pt-12">
+                        <div class="p-6 rounded-2xl glass-panel-3d hover:border-mintGlow transition-all duration-300 group">
+                            <div class="text-3xl font-bold text-creamText group-hover:text-mintGlow">1,000+</div>
+                            <div class="text-[8px] font-bold text-slateGray uppercase tracking-widest mt-1.5 leading-tight">Products Migrated</div>
+                        </div>
+                        <div class="p-6 rounded-2xl glass-panel-3d hover:border-mintGlow transition-all duration-300 group">
+                            <div class="text-3xl font-bold text-creamText group-hover:text-mintGlow">12+</div>
+                            <div class="text-[8px] font-bold text-slateGray uppercase tracking-widest mt-1.5 leading-tight">Sites Launched</div>
+                        </div>
+                        <div class="p-6 rounded-2xl glass-panel-3d hover:border-mintGlow transition-all duration-300 group">
+                            <div class="text-3xl font-bold text-creamText group-hover:text-mintGlow">98%</div>
+                            <div class="text-[8px] font-bold text-slateGray uppercase tracking-widest mt-1.5 leading-tight">SEO Audits Score</div>
+                        </div>
+                        <div class="p-6 rounded-2xl glass-panel-3d hover:border-mintGlow transition-all duration-300 group">
+                            <div class="text-3xl font-bold text-creamText group-hover:text-mintGlow">100%</div>
+                            <div class="text-[8px] font-bold text-slateGray uppercase tracking-widest mt-1.5 leading-tight">Mobile Response</div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. Experience Section (3D Timeline style layout) -->
+    <section id="experience" class="py-32 relative overflow-hidden border-t border-mintGlow/5">
+        
+        <div class="absolute top-0 right-0 w-[30%] aspect-square rounded-full bg-mintGlow/5 blur-[120px] pointer-events-none -z-10"></div>
+
+        <div class="max-w-7xl mx-auto px-8">
+            
+            <!-- Header Grid -->
+            <div class="mb-20 grid grid-cols-1 lg:grid-cols-12 gap-8 items-end reveal-node">
+                <div class="lg:col-span-8 space-y-4">
+                    <div class="flex items-center gap-2 text-mintGlow font-extrabold text-[10px] uppercase tracking-widest">
+                        <span class="w-6 h-0.5 bg-mintGlow"></span>
+                        Professional Chronicle
+                    </div>
+                    <h2 class="text-4xl lg:text-5xl font-extrabold tracking-tight leading-tight text-creamText">
+                        Career Experience Timeline.
+                    </h2>
+                    <p class="text-slateGray font-light max-w-xl text-sm leading-relaxed">
+                        Redesigned as an active 3D detailed panel, highlighting my technical coordinates, bulk spreadsheet compiling, visual visual checks, and systems alarm diagnostics.
+                    </p>
+                </div>
+                <!-- Toggle selector -->
+                <div class="lg:col-span-4 flex lg:justify-end">
+                    <div class="flex items-center gap-2.5 text-[10px] font-bold uppercase tracking-widest text-mintGlow bg-white border border-mintGlow/20 rounded-full px-5 py-2.5 shadow-lg">
+                        <i data-lucide="mouse-pointer-click" class="w-4 h-4 text-mintGlow"></i> Click Role Card to View Details
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tabbed Timeline Grid -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start reveal-node">
+                
+                <!-- Left Buttons -->
+                <div class="lg:col-span-5 flex flex-col gap-6">
+                    
+                    <!-- Tab Button 1: Hana Soft -->
+                    <button onclick="switchRoleTab('hanasoft-content', this)" class="role-tab-btn group text-left p-8 rounded-[2.5rem] bg-gradient-to-r from-mintGlow to-cyberBlue border-none relative overflow-hidden transition-all duration-300 scale-[1.02] shadow-2xl">
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="text-[9px] font-bold text-white bg-white/20 border border-white/30 px-3 py-1 rounded-full uppercase tracking-wider">Oct 2025 – Present</span>
+                            <span class="text-white text-[10px] flex items-center gap-1.5 uppercase font-bold tracking-wider"><i data-lucide="code" class="w-3.5 h-3.5 text-white"></i> Active Developer</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-white transition-colors">Hana Soft AI Solutions / Hana POS</h3>
+                        <p class="text-xs text-white/80 mt-2 font-light leading-relaxed">Florist e-commerce catalog migration, Visual layout responsive overrides, storefront theme updates, and metadata checks.</p>
+                    </button>
+
+                    <!-- Tab Button 2: Jio NOC -->
+                    <button onclick="switchRoleTab('jio-content', this)" class="role-tab-btn group text-left p-8 rounded-[2.5rem] bg-white border border-mintGlow/10 relative overflow-hidden transition-all duration-300 hover:bg-white hover:border-mintGlow/25 shadow-md">
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="text-[9px] font-bold text-slateGray bg-[#FF4500]/5 border border-mintGlow/10 px-3 py-1 rounded-full uppercase tracking-wider">Prior Operations</span>
+                            <span class="text-slateGray text-[10px] flex items-center gap-1.5 uppercase font-bold tracking-wider"><i data-lucide="activity" class="w-3.5 h-3.5 text-mintGlow"></i> NOC Telemetry</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-slateGray group-hover:text-creamText transition-colors">Reliance Jio Infocomm Ltd</h3>
+                        <p class="text-xs text-slateGray/80 mt-2 font-light leading-relaxed">Fiber incident coordinate alarms processing, OLT fiber signal telemetry tracking, and SAP ticket logs management.</p>
+                    </button>
+
+                </div>
+
+                <!-- Right Display Pane -->
+                <div class="lg:col-span-7">
+                    
+                    <!-- Pane 1: Hana Soft Details -->
+                    <div id="hanasoft-content" class="role-pane transition-opacity duration-300">
+                        <div class="p-8 md:p-10 rounded-[2.5rem] glass-panel-3d space-y-8 relative overflow-hidden">
+                            <div class="absolute -right-16 -bottom-16 w-40 h-40 bg-mintGlow/5 blur-[50px] rounded-full"></div>
+                            
+                            <div class="space-y-3">
+                                <div class="text-[9px] text-mintGlow uppercase font-bold tracking-widest">Active Development Role</div>
+                                <h3 class="text-3xl font-bold text-creamText">Junior Web Developer</h3>
+                                <p class="text-slateGray text-xs tracking-wider uppercase font-medium">Hana Soft AI Solutions &nbsp;•&nbsp; Coimbatore, India</p>
+                            </div>
+                            <div class="h-[1px] bg-mintGlow/10"></div>
+                            
+                            <div class="space-y-5">
+                                <h4 class="text-[10px] text-mintGlow font-bold uppercase tracking-widest">Core Responsibilities</h4>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <!-- Card 1: Product Catalog Migration -->
+                                    <div class="p-5 rounded-2xl bg-white/45 border border-mintGlow/10 flex flex-col justify-between gap-4 transition-all duration-300 hover:border-mintGlow/25 hover:bg-white/70 hover:-translate-y-0.5 shadow-sm hover:shadow-md group">
+                                        <div class="space-y-3">
+                                            <div class="flex items-center justify-between">
+                                                <div class="w-9 h-9 rounded-xl bg-mintGlow/10 text-mintGlow flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform">
+                                                    <i data-lucide="database" class="w-4.5 h-4.5"></i>
+                                                </div>
+                                                <span class="text-[9px] font-bold text-mintGlow bg-mintGlow/10 border border-mintGlow/25 px-2 py-0.5 rounded-full uppercase tracking-wider">E-Commerce Data</span>
+                                            </div>
+                                            <div class="space-y-1">
+                                                <h5 class="font-bold text-xs text-creamText tracking-wide uppercase">Product Catalog Migration</h5>
+                                                <p class="text-[11px] text-slateGray leading-relaxed font-light font-sans">
+                                                    Managed migration layouts of product items catalog listings. Compiled data files, categorizing inventories, seasonal labels, and details using Excel bulk data spreadsheets.
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <!-- Tech Tag pills -->
+                                        <div class="flex flex-wrap gap-1.5 pt-2 border-t border-mintGlow/5">
+                                            <span class="bg-mintGlow/5 text-mintGlow/85 text-[9px] font-medium px-2 py-0.5 rounded-md">Excel Bulk</span>
+                                            <span class="bg-mintGlow/5 text-mintGlow/85 text-[9px] font-medium px-2 py-0.5 rounded-md">Catalog Migration</span>
+                                            <span class="bg-mintGlow/5 text-mintGlow/85 text-[9px] font-medium px-2 py-0.5 rounded-md">Data Mapping</span>
+                                        </div>
+                                    </div>
+
+                                    <!-- Card 2: Website Configuration & UI Redesign -->
+                                    <div class="p-5 rounded-2xl bg-white/45 border border-mintGlow/10 flex flex-col justify-between gap-4 transition-all duration-300 hover:border-mintGlow/25 hover:bg-white/70 hover:-translate-y-0.5 shadow-sm hover:shadow-md group">
+                                        <div class="space-y-3">
+                                            <div class="flex items-center justify-between">
+                                                <div class="w-9 h-9 rounded-xl bg-mintGlow/10 text-mintGlow flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform">
+                                                    <i data-lucide="layout" class="w-4.5 h-4.5"></i>
+                                                </div>
+                                                <span class="text-[9px] font-bold text-mintGlow bg-mintGlow/10 border border-mintGlow/25 px-2 py-0.5 rounded-full uppercase tracking-wider">UI/UX Redesign</span>
+                                            </div>
+                                            <div class="space-y-1">
+                                                <h5 class="font-bold text-xs text-creamText tracking-wide uppercase">Website Config & UI Redesign</h5>
+                                                <p class="text-[11px] text-slateGray leading-relaxed font-light font-sans">
+                                                    Executed layouts overrides for florist store storefronts, adjusting visual grids, typography sizing, visual margins, and responsive layouts styles.
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <!-- Tech Tag pills -->
+                                        <div class="flex flex-wrap gap-1.5 pt-2 border-t border-mintGlow/5">
+                                            <span class="bg-mintGlow/5 text-mintGlow/85 text-[9px] font-medium px-2 py-0.5 rounded-md">CSS Grids</span>
+                                            <span class="bg-mintGlow/5 text-mintGlow/85 text-[9px] font-medium px-2 py-0.5 rounded-md">Tailwind CSS</span>
+                                            <span class="bg-mintGlow/5 text-mintGlow/85 text-[9px] font-medium px-2 py-0.5 rounded-md">Responsive UI</span>
+                                        </div>
+                                    </div>
+
+                                    <!-- Card 3: E-Commerce Layout Management -->
+                                    <div class="p-5 rounded-2xl bg-white/45 border border-mintGlow/10 flex flex-col justify-between gap-4 transition-all duration-300 hover:border-mintGlow/25 hover:bg-white/70 hover:-translate-y-0.5 shadow-sm hover:shadow-md group">
+                                        <div class="space-y-3">
+                                            <div class="flex items-center justify-between">
+                                                <div class="w-9 h-9 rounded-xl bg-mintGlow/10 text-mintGlow flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform">
+                                                    <i data-lucide="globe" class="w-4.5 h-4.5"></i>
+                                                </div>
+                                                <span class="text-[9px] font-bold text-mintGlow bg-mintGlow/10 border border-mintGlow/25 px-2 py-0.5 rounded-full uppercase tracking-wider">Storefront Layouts</span>
+                                            </div>
+                                            <div class="space-y-1">
+                                                <h5 class="font-bold text-xs text-creamText tracking-wide uppercase">E-Commerce Storefront Layouts</h5>
+                                                <p class="text-[11px] text-slateGray leading-relaxed font-light font-sans">
+                                                    Setup promotional layout blocks, seasonal headers assets, responsive navigation rules, and catalog categories visual presentations.
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <!-- Tech Tag pills -->
+                                        <div class="flex flex-wrap gap-1.5 pt-2 border-t border-mintGlow/5">
+                                            <span class="bg-mintGlow/5 text-mintGlow/85 text-[9px] font-medium px-2 py-0.5 rounded-md">HTML5 / CSS3</span>
+                                            <span class="bg-mintGlow/5 text-mintGlow/85 text-[9px] font-medium px-2 py-0.5 rounded-md">Storefront Design</span>
+                                            <span class="bg-mintGlow/5 text-mintGlow/85 text-[9px] font-medium px-2 py-0.5 rounded-md">Inventory Blocks</span>
+                                        </div>
+                                    </div>
+
+                                    <!-- Card 4: SEO & SSL Diagnostics -->
+                                    <div class="p-5 rounded-2xl bg-white/45 border border-mintGlow/10 flex flex-col justify-between gap-4 transition-all duration-300 hover:border-mintGlow/25 hover:bg-white/70 hover:-translate-y-0.5 shadow-sm hover:shadow-md group">
+                                        <div class="space-y-3">
+                                            <div class="flex items-center justify-between">
+                                                <div class="w-9 h-9 rounded-xl bg-mintGlow/10 text-mintGlow flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform">
+                                                    <i data-lucide="shield-check" class="w-4.5 h-4.5"></i>
+                                                </div>
+                                                <span class="text-[9px] font-bold text-mintGlow bg-mintGlow/10 border border-mintGlow/25 px-2 py-0.5 rounded-full uppercase tracking-wider">SEO & Security</span>
+                                            </div>
+                                            <div class="space-y-1">
+                                                <h5 class="font-bold text-xs text-creamText tracking-wide uppercase">SEO & SSL Diagnostics</h5>
+                                                <p class="text-[11px] text-slateGray leading-relaxed font-light font-sans">
+                                                    Conducted visual site validation audits. Verified redirects coordinates, updated secure SSL keys tags, compiled metadata, and fixed layout shifts on phones.
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <!-- Tech Tag pills -->
+                                        <div class="flex flex-wrap gap-1.5 pt-2 border-t border-mintGlow/5">
+                                            <span class="bg-mintGlow/5 text-mintGlow/85 text-[9px] font-medium px-2 py-0.5 rounded-md">SEO Audits</span>
+                                            <span class="bg-mintGlow/5 text-mintGlow/85 text-[9px] font-medium px-2 py-0.5 rounded-md">SSL Certificate</span>
+                                            <span class="bg-mintGlow/5 text-mintGlow/85 text-[9px] font-medium px-2 py-0.5 rounded-md">Layout shifts</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Pane 2: Jio NOC Details -->
+                    <div id="jio-content" class="role-pane hidden transition-opacity duration-300">
+                        <div class="p-8 md:p-10 rounded-[2.5rem] glass-panel-3d space-y-8 relative overflow-hidden">
+                            <div class="absolute -right-16 -bottom-16 w-40 h-40 bg-cyberBlue/5 blur-[50px] rounded-full"></div>
+                            
+                            <div class="space-y-3">
+                                <div class="text-[9px] text-cyberBlue uppercase font-bold tracking-widest">Prior Telecom Operations</div>
+                                <h3 class="text-3xl font-bold text-creamText">Network Operations Center (NOC) Engineer</h3>
+                                <p class="text-slateGray text-xs tracking-wider uppercase font-medium">Reliance Jio Infocomm Ltd &nbsp;•&nbsp; Coimbatore Region, India</p>
+                            </div>
+                            <div class="h-[1px] bg-mintGlow/10"></div>
+                            
+                            <div class="space-y-5">
+                                <h4 class="text-[10px] text-cyberBlue font-bold uppercase tracking-widest">Core Responsibilities</h4>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <!-- Card 1: Accops Fiber Power & OLT Telemetry -->
+                                    <div class="p-5 rounded-2xl bg-white/45 border border-cyberBlue/10 flex flex-col justify-between gap-4 transition-all duration-300 hover:border-cyberBlue/25 hover:bg-white/70 hover:-translate-y-0.5 shadow-sm hover:shadow-md group">
+                                        <div class="space-y-3">
+                                            <div class="flex items-center justify-between">
+                                                <div class="w-9 h-9 rounded-xl bg-cyberBlue/10 text-cyberBlue flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform">
+                                                    <i data-lucide="activity" class="w-4.5 h-4.5"></i>
+                                                </div>
+                                                <span class="text-[9px] font-bold text-cyberBlue bg-cyberBlue/10 border border-cyberBlue/25 px-2 py-0.5 rounded-full uppercase tracking-wider">Telemetry Audits</span>
+                                            </div>
+                                            <div class="space-y-1">
+                                                <h5 class="font-bold text-xs text-creamText tracking-wide uppercase">Accops Fiber & OLT Telemetry</h5>
+                                                <p class="text-[11px] text-slateGray leading-relaxed font-light font-sans">
+                                                    Tracked optical signal variation metrics, fiber transmission states, OLT port alarms, and connectivity statuses.
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <!-- Tech Tag pills -->
+                                        <div class="flex flex-wrap gap-1.5 pt-2 border-t border-cyberBlue/5">
+                                            <span class="bg-cyberBlue/5 text-cyberBlue/85 text-[9px] font-medium px-2 py-0.5 rounded-md">Accops Fiber</span>
+                                            <span class="bg-cyberBlue/5 text-cyberBlue/85 text-[9px] font-medium px-2 py-0.5 rounded-md">OLT Telemetry</span>
+                                            <span class="bg-cyberBlue/5 text-cyberBlue/85 text-[9px] font-medium px-2 py-0.5 rounded-md">Port Alarms</span>
+                                        </div>
+                                    </div>
+
+                                    <!-- Card 2: SAP Incident Tickets Logging -->
+                                    <div class="p-5 rounded-2xl bg-white/45 border border-cyberBlue/10 flex flex-col justify-between gap-4 transition-all duration-300 hover:border-cyberBlue/25 hover:bg-white/70 hover:-translate-y-0.5 shadow-sm hover:shadow-md group">
+                                        <div class="space-y-3">
+                                            <div class="flex items-center justify-between">
+                                                <div class="w-9 h-9 rounded-xl bg-cyberBlue/10 text-cyberBlue flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform">
+                                                    <i data-lucide="file-spreadsheet" class="w-4.5 h-4.5"></i>
+                                                </div>
+                                                <span class="text-[9px] font-bold text-cyberBlue bg-cyberBlue/10 border border-cyberBlue/25 px-2 py-0.5 rounded-full uppercase tracking-wider">Troubleshooting CRM</span>
+                                            </div>
+                                            <div class="space-y-1">
+                                                <h5 class="font-bold text-xs text-creamText tracking-wide uppercase">SAP Incident Tickets Logging</h5>
+                                                <p class="text-[11px] text-slateGray leading-relaxed font-light font-sans">
+                                                    Created troubleshooting profiles for outages (Fiber Cut, OLT Isolation, Site Down, TECO, Reassign) using database records.
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <!-- Tech Tag pills -->
+                                        <div class="flex flex-wrap gap-1.5 pt-2 border-t border-cyberBlue/5">
+                                            <span class="bg-cyberBlue/5 text-cyberBlue/85 text-[9px] font-medium px-2 py-0.5 rounded-md">SAP Tickets</span>
+                                            <span class="bg-cyberBlue/5 text-cyberBlue/85 text-[9px] font-medium px-2 py-0.5 rounded-md">Outage Profiles</span>
+                                            <span class="bg-cyberBlue/5 text-cyberBlue/85 text-[9px] font-medium px-2 py-0.5 rounded-md">Database Logs</span>
+                                        </div>
+                                    </div>
+
+                                    <!-- Card 3: Outage Coordinates Dispatch -->
+                                    <div class="p-5 rounded-2xl bg-white/45 border border-cyberBlue/10 flex flex-col justify-between gap-4 transition-all duration-300 hover:border-cyberBlue/25 hover:bg-white/70 hover:-translate-y-0.5 shadow-sm hover:shadow-md group">
+                                        <div class="space-y-3">
+                                            <div class="flex items-center justify-between">
+                                                <div class="w-9 h-9 rounded-xl bg-cyberBlue/10 text-cyberBlue flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform">
+                                                    <i data-lucide="navigation" class="w-4.5 h-4.5"></i>
+                                                </div>
+                                                <span class="text-[9px] font-bold text-cyberBlue bg-cyberBlue/10 border border-cyberBlue/25 px-2 py-0.5 rounded-full uppercase tracking-wider">Incident Dispatch</span>
+                                            </div>
+                                            <div class="space-y-1">
+                                                <h5 class="font-bold text-xs text-creamText tracking-wide uppercase">Outage Coordinates Dispatch</h5>
+                                                <p class="text-[11px] text-slateGray leading-relaxed font-light font-sans">
+                                                    Directed incident locations details to restoration fibers crews and regional NOC operations managers to restore links.
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <!-- Tech Tag pills -->
+                                        <div class="flex flex-wrap gap-1.5 pt-2 border-t border-cyberBlue/5">
+                                            <span class="bg-cyberBlue/5 text-cyberBlue/85 text-[9px] font-medium px-2 py-0.5 rounded-md">Incident Coordinates</span>
+                                            <span class="bg-cyberBlue/5 text-cyberBlue/85 text-[9px] font-medium px-2 py-0.5 rounded-md">Fiber Restoration</span>
+                                            <span class="bg-cyberBlue/5 text-cyberBlue/85 text-[9px] font-medium px-2 py-0.5 rounded-md">Route Dispatch</span>
+                                        </div>
+                                    </div>
+
+                                    <!-- Card 4: Territorial Scope -->
+                                    <div class="p-5 rounded-2xl bg-white/45 border border-cyberBlue/10 flex flex-col justify-between gap-4 transition-all duration-300 hover:border-cyberBlue/25 hover:bg-white/70 hover:-translate-y-0.5 shadow-sm hover:shadow-md group">
+                                        <div class="space-y-3">
+                                            <div class="flex items-center justify-between">
+                                                <div class="w-9 h-9 rounded-xl bg-cyberBlue/10 text-cyberBlue flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform">
+                                                    <i data-lucide="map" class="w-4.5 h-4.5"></i>
+                                                </div>
+                                                <span class="text-[9px] font-bold text-cyberBlue bg-cyberBlue/10 border border-cyberBlue/25 px-2 py-0.5 rounded-full uppercase tracking-wider">Regional Coverage</span>
+                                            </div>
+                                            <div class="space-y-1">
+                                                <h5 class="font-bold text-xs text-creamText tracking-wide uppercase">Territorial Scope</h5>
+                                                <p class="text-[11px] text-slateGray leading-relaxed font-light font-sans">
+                                                    Monitored fiber transmission routes across Coimbatore, Pollachi, Nilgiris, Gudalur, and Mettupalayam districts.
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <!-- Tech Tag pills -->
+                                        <div class="flex flex-wrap gap-1.5 pt-2 border-t border-cyberBlue/5">
+                                            <span class="bg-cyberBlue/5 text-cyberBlue/85 text-[9px] font-medium px-2 py-0.5 rounded-md">Route Monitoring</span>
+                                            <span class="bg-cyberBlue/5 text-cyberBlue/85 text-[9px] font-medium px-2 py-0.5 rounded-md">District Coverage</span>
+                                            <span class="bg-cyberBlue/5 text-cyberBlue/85 text-[9px] font-medium px-2 py-0.5 rounded-md">Telecom Networks</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- 5. Skills Section (3D Cards) -->
+    <section id="skills" class="py-32 border-t border-mintGlow/5 relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-8">
+            
+            <!-- Header -->
+            <div class="max-w-2xl mb-20 space-y-4 reveal-node">
+                <div class="flex items-center gap-2 text-mintGlow font-bold text-[10px] uppercase tracking-widest">
+                    <span class="w-6 h-0.5 bg-mintGlow"></span>
+                    Tech Capabilities
+                </div>
+                <h2 class="text-4xl lg:text-5xl font-extrabold tracking-tight leading-tight text-creamText">
+                    Technical Tooling Grid.
+                </h2>
+                <p class="text-slateGray font-light text-sm md:text-base leading-relaxed">
+                    An layout of front-end visuals tools, databases structures, bulk spreadsheets configuration workflows, and ongoing software studies.
+                </p>
+            </div>
+
+            <!-- 3D Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6 reveal-node">
+                
+                <!-- Front-End -->
+                <div class="tilt-card glass-panel-3d p-8 rounded-[2.5rem] relative overflow-hidden flex flex-col justify-between group shadow-2xl">
+                    <div class="absolute -right-10 -bottom-10 w-24 h-24 bg-mintGlow/5 blur-[30px] rounded-full"></div>
+                    <div>
+                        <div class="w-10 h-10 rounded-2xl bg-mintGlow/10 text-mintGlow flex items-center justify-center mb-6 group-hover:scale-105 transition-transform"><i data-lucide="layout" class="w-5 h-5"></i></div>
+                        <h3 class="font-bold text-lg text-creamText mb-4">Frontend</h3>
+                        <ul class="space-y-2.5 text-xs text-slateGray font-medium">
+                            <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-mintGlow"></span> HTML5</li>
+                            <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-mintGlow"></span> CSS3</li>
+                            <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-mintGlow"></span> JavaScript</li>
+                            <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-mintGlow"></span> Tailwind CSS</li>
+                            <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-mintGlow"></span> Bootstrap</li>
+                            <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-mintGlow"></span> Responsive UI</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Back-End -->
+                <div class="tilt-card glass-panel-3d p-8 rounded-[2.5rem] relative overflow-hidden flex flex-col justify-between group shadow-2xl">
+                    <div class="absolute -right-10 -bottom-10 w-24 h-24 bg-cyberBlue/5 blur-[30px] rounded-full"></div>
+                    <div>
+                        <div class="w-10 h-10 rounded-2xl bg-cyberBlue/10 text-cyberBlue flex items-center justify-center mb-6 group-hover:scale-105 transition-transform"><i data-lucide="server" class="w-5 h-5"></i></div>
+                        <h3 class="font-bold text-lg text-creamText mb-4">Backend</h3>
+                        <ul class="space-y-2.5 text-xs text-slateGray font-medium">
+                            <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-cyberBlue"></span> Node.js</li>
+                            <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-cyberBlue"></span> Express.js</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Database -->
+                <div class="tilt-card glass-panel-3d p-8 rounded-[2.5rem] relative overflow-hidden flex flex-col justify-between group shadow-2xl">
+                    <div class="absolute -right-10 -bottom-10 w-24 h-24 bg-mintGlow/5 blur-[30px] rounded-full"></div>
+                    <div>
+                        <div class="w-10 h-10 rounded-2xl bg-mintGlow/10 text-mintGlow flex items-center justify-center mb-6 group-hover:scale-105 transition-transform"><i data-lucide="database" class="w-5 h-5"></i></div>
+                        <h3 class="font-bold text-lg text-creamText mb-4">Database</h3>
+                        <ul class="space-y-2.5 text-xs text-slateGray font-medium">
+                            <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-mintGlow"></span> MongoDB</li>
+                            <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-mintGlow"></span> SQL Server</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Tools & CMS -->
+                <div class="tilt-card glass-panel-3d p-8 rounded-[2.5rem] relative overflow-hidden flex flex-col justify-between group shadow-2xl">
+                    <div class="absolute -right-10 -bottom-10 w-24 h-24 bg-cyberBlue/5 blur-[30px] rounded-full"></div>
+                    <div>
+                        <div class="w-10 h-10 rounded-2xl bg-cyberBlue/10 text-cyberBlue flex items-center justify-center mb-6 group-hover:scale-105 transition-transform"><i data-lucide="wrench" class="w-5 h-5"></i></div>
+                        <h3 class="font-bold text-lg text-creamText mb-4">Tools & Utilities</h3>
+                        <ul class="space-y-2.5 text-xs text-slateGray font-medium">
+                            <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-cyberBlue"></span> Git / GitHub</li>
+                            <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-cyberBlue"></span> Chrome DevTools</li>
+                            <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-cyberBlue"></span> Excel Data</li>
+                            <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-cyberBlue"></span> VS Code / Postman</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Learning Stacks -->
+                <div class="tilt-card glass-panel-3d p-8 rounded-[2.5rem] relative overflow-hidden flex flex-col justify-between group shadow-2xl">
+                    <div class="absolute -right-10 -bottom-10 w-24 h-24 bg-mintGlow/5 blur-[30px] rounded-full"></div>
+                    <div>
+                        <div class="w-10 h-10 rounded-2xl bg-mintGlow/10 text-mintGlow flex items-center justify-center mb-6 group-hover:scale-105 transition-transform"><i data-lucide="graduation-cap" class="w-5 h-5"></i></div>
+                        <h3 class="font-bold text-lg text-creamText mb-4">Learning</h3>
+                        <ul class="space-y-2.5 text-xs text-slateGray font-medium">
+                            <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-mintGlow"></span> ASP.NET MVC</li>
+                            <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-mintGlow"></span> DevOps Basics</li>
+                            <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-mintGlow"></span> SDLC Cycles</li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- 6. Projects Section (3D Case Studies with Tilt Effect) -->
+    <section id="projects" class="py-32 border-t border-mintGlow/5 relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-8">
+            
+            <!-- Header -->
+            <div class="max-w-2xl mb-24 space-y-4 reveal-node">
+                <div class="flex items-center gap-2 text-mintGlow font-bold text-[10px] uppercase tracking-widest">
+                    <span class="w-6 h-0.5 bg-mintGlow"></span>
+                    Portfolio Showcase
+                </div>
+                <h2 class="text-4xl lg:text-5xl font-extrabold tracking-tight leading-tight text-creamText">
+                    Case Studies.
+                </h2>
+                <p class="text-slateGray font-light text-sm md:text-base leading-relaxed">
+                    A list of my custom visual layouts, store themes customization projects, backend schemas setups, and data compilations.
+                </p>
+            </div>
+
+            <!-- Case Study items list (Alternating Grid Rows) -->
+            <div class="space-y-32">
+                
+                <!-- Project 1 (Apartment Manager) -->
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center reveal-node">
+                    <!-- Visual Mockup Column (Left) -->
+                    <div class="lg:col-span-6 order-1">
+                        <div class="tilt-card p-6 rounded-[2.5rem] bg-[#FF4500]/5 border border-mintGlow/10 relative overflow-hidden group shadow-2xl preserve-3d">
+                            <!-- macOS Browser Mockup window -->
+                            <div class="rounded-2xl border border-mintGlow/10 bg-[#2D1E19] shadow-2xl overflow-hidden font-sans text-[11px] text-gray-300">
+                                <!-- Top Bar controls -->
+                                <div class="bg-[#211512] px-4 py-3 border-b border-white/5 flex items-center gap-1.5">
+                                    <span class="w-2.5 h-2.5 rounded-full bg-[#FF5F56] inline-block"></span>
+                                    <span class="w-2.5 h-2.5 rounded-full bg-[#FFBD2E] inline-block"></span>
+                                    <span class="w-2.5 h-2.5 rounded-full bg-[#27C93F] inline-block"></span>
+                                    <span class="ml-4 text-[9px] text-gray-400 font-mono tracking-wider bg-white/5 px-3 py-0.5 rounded-full">localhost:3000/residents</span>
+                                </div>
+                                <!-- Content elements -->
+                                <div class="p-6 space-y-4 bg-[#2D1E19]">
+                                    <div class="flex items-center justify-between border-b border-white/5 pb-3">
+                                        <div class="flex items-center gap-2"><span class="w-4 h-4 rounded bg-mintGlow text-white flex items-center justify-center font-bold text-[9px]">A</span><span class="font-bold text-xs text-white">Apartment HUD</span></div>
+                                        <span class="text-[9px] text-mintGlow font-bold uppercase tracking-widest bg-mintGlow/10 border border-mintGlow/25 px-2.5 py-0.5 rounded-full">ACTIVE DB</span>
+                                    </div>
+                                    <div class="grid grid-cols-3 gap-3">
+                                        <div class="p-3 bg-white/5 border border-white/5 rounded-xl">
+                                            <span class="text-[8px] text-gray-400 uppercase block">Roster</span>
+                                            <span class="text-base font-bold text-white mt-1 block">248 Total</span>
+                                        </div>
+                                        <div class="p-3 bg-white/5 border border-white/5 rounded-xl">
+                                            <span class="text-[8px] text-gray-400 uppercase block">Outages</span>
+                                            <span class="text-base font-bold text-mintGlow mt-1 block">14 Active</span>
+                                        </div>
+                                        <div class="p-3 bg-white/5 border border-white/5 rounded-xl">
+                                            <span class="text-[8px] text-gray-400 uppercase block">Operators</span>
+                                            <span class="text-base font-bold text-white mt-1 block">16 Users</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Narrative Details Column (Right) -->
+                    <div class="lg:col-span-6 order-2 space-y-6">
+                        <span class="text-[9px] font-bold text-mintGlow bg-mintGlow/10 border border-mintGlow/35 px-3.5 py-1 rounded-full uppercase tracking-widest">MERN Stack Development</span>
+                        <h3 class="text-3xl sm:text-4xl font-extrabold text-creamText leading-tight">Apartment Management System</h3>
+                        <p class="text-slateGray text-sm md:text-base font-light leading-relaxed">
+                            Designed a central database administration pipeline to coordinate resident directories details, service ticket logs, dispatch updates, and visual check summaries. Built using React, Node, Express, and MongoDB.
+                        </p>
+                        <div class="flex flex-wrap gap-2 text-[10px] font-bold text-mintGlow uppercase tracking-widest font-display">
+                            <span>#React.js</span> • <span>#Node.js</span> • <span>#MongoDB</span> • <span>#REST_API</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 2 (Florist Website UI) -->
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center reveal-node">
+                    <!-- Narrative Details Column (Left) -->
+                    <div class="lg:col-span-6 order-2 lg:order-1 space-y-6">
+                        <span class="text-[9px] font-bold text-cyberBlue bg-cyberBlue/10 border border-cyberBlue/30 px-3.5 py-1 rounded-full uppercase tracking-widest">Frontend Custom Redesign</span>
+                        <h3 class="text-3xl sm:text-4xl font-extrabold text-creamText leading-tight">Florist Website UI Redesign</h3>
+                        <p class="text-slateGray text-sm md:text-base font-light leading-relaxed">
+                            Conducted visual audits and redesigned visual styles for floral portals store interfaces. Fixed layout overlaps, verified breakpoints configs, adjusted responsive margins, and customized category displays.
+                        </p>
+                        <div class="flex flex-wrap gap-2 text-[10px] font-bold text-cyberBlue uppercase tracking-widest font-display">
+                            <span>#HTML5</span> • <span>#CSS3</span> • <span>#JavaScript</span> • <span>#Responsive</span>
+                        </div>
+                    </div>
+                    <!-- Visual Mockup Column (Right) -->
+                    <div class="lg:col-span-6 order-1 lg:order-2">
+                        <div class="tilt-card p-6 rounded-[2.5rem] bg-[#FF4500]/5 border border-mintGlow/10 relative overflow-hidden group shadow-2xl preserve-3d">
+                            <!-- Shop Visual Mockup -->
+                            <div class="rounded-2xl border border-mintGlow/10 bg-white shadow-2xl overflow-hidden font-sans text-xs text-[#2D1E19]">
+                                <div class="bg-[#FFF1ED] px-4 py-3 border-b border-mintGlow/10 flex items-center justify-between">
+                                    <span class="text-[9px] uppercase tracking-widest text-[#2D1E19] font-bold"><i data-lucide="flower" class="w-3.5 h-3.5 text-mintGlow inline mr-1 animate-spin-slow"></i> Blooms Portal</span>
+                                    <i data-lucide="shopping-cart" class="w-4 h-4 text-mintGlow"></i>
+                                </div>
+                                <div class="p-6 grid grid-cols-2 gap-4 bg-white">
+                                    <div class="p-3.5 rounded-xl bg-[#FFFDFB] border border-mintGlow/10 space-y-3">
+                                        <div class="h-20 rounded bg-[#FF4500]/5 flex items-center justify-center text-mintGlow"><i data-lucide="flower" class="w-6 h-6 animate-pulse-slow"></i></div>
+                                        <div class="font-bold text-[10px] text-creamText">Spring Bouquet</div>
+                                        <div class="flex items-center justify-between"><span class="text-slateGray">$45.00</span><span class="bg-mintGlow text-white text-[8px] font-bold px-2 py-0.5 rounded uppercase">Add</span></div>
+                                    </div>
+                                    <div class="p-3.5 rounded-xl bg-[#FFFDFB] border border-mintGlow/10 space-y-3">
+                                        <div class="h-20 rounded bg-[#FF4500]/5 flex items-center justify-center text-mintGlow"><i data-lucide="sun" class="w-6 h-6 animate-pulse-slow"></i></div>
+                                        <div class="font-bold text-[10px] text-creamText">Sunflowers Pot</div>
+                                        <div class="flex items-center justify-between"><span class="text-slateGray">$39.00</span><span class="bg-mintGlow text-white text-[8px] font-bold px-2 py-0.5 rounded uppercase">Add</span></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 3 (Hana POS Theme Redesign) -->
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center reveal-node">
+                    <!-- Visual Mockup Column (Left) -->
+                    <div class="lg:col-span-6 order-1">
+                        <div class="tilt-card p-6 rounded-[2.5rem] bg-[#FF4500]/5 border border-mintGlow/10 relative overflow-hidden group shadow-2xl preserve-3d">
+                            <!-- Theme overrides panel -->
+                            <div class="rounded-2xl border border-mintGlow/10 bg-[#2D1E19] text-gray-300 shadow-2xl overflow-hidden font-sans text-xs">
+                                <div class="bg-[#211512] px-4 py-3 border-b border-white/5 flex items-center justify-between">
+                                    <span class="text-[9px] uppercase tracking-widest text-mintGlow font-bold">POS Overrides HUD</span>
+                                    <span class="text-[8px] text-gray-500 bg-white/5 px-2 py-0.5 rounded font-mono">CSS_Grid</span>
+                                </div>
+                                <div class="p-6 bg-[#2D1E19] grid grid-cols-12 gap-3">
+                                    <div class="col-span-8 p-3 rounded-xl bg-[#211512] border border-white/5 space-y-2">
+                                        <span class="text-[8px] text-gray-500 uppercase block font-bold">Orders Cart</span>
+                                        <div class="flex items-center justify-between text-[10px] border-b border-white/5 pb-1">
+                                            <span>Sunflowers Box</span><span class="font-mono text-mintGlow">$35.00</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-span-4 p-3 rounded-xl bg-[#211512] border border-white/5 flex flex-col justify-between text-center">
+                                        <span class="text-[8px] text-gray-500 block uppercase font-bold">Total</span>
+                                        <span class="text-xs font-bold text-mintGlow font-mono">$35.00</span>
+                                        <span class="w-full bg-mintGlow text-white text-[8px] font-bold py-1 rounded uppercase">Pay</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Narrative Details Column (Right) -->
+                    <div class="lg:col-span-6 order-2 space-y-6">
+                        <span class="text-[9px] font-bold text-mintGlow bg-mintGlow/10 border border-mintGlow/35 px-3.5 py-1 rounded-full uppercase tracking-widest">Theme Layout Customization</span>
+                        <h3 class="text-3xl sm:text-4xl font-extrabold text-creamText leading-tight">Hana POS Theme Redesign</h3>
+                        <p class="text-slateGray text-sm md:text-base font-light leading-relaxed">
+                            Theme modularization and visual metrics customization for active florist POS client layouts. Restructured item display cards grids, set navigation responsive thresholds, and customized checkout details presentations.
+                        </p>
+                        <div class="flex flex-wrap gap-2 text-[10px] font-bold text-mintGlow uppercase tracking-widest font-display">
+                            <span>#POS_UI</span> • <span>#CSS_Grid</span> • <span>#Layout_Overrides</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 4 (Bulk Catalog Compiler) -->
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center reveal-node">
+                    <!-- Narrative Details Column (Left) -->
+                    <div class="lg:col-span-6 order-2 lg:order-1 space-y-6">
+                        <span class="text-[9px] font-bold text-cyberBlue bg-cyberBlue/10 border border-cyberBlue/30 px-3.5 py-1 rounded-full uppercase tracking-widest">E-commerce Data Operations</span>
+                        <h3 class="text-3xl sm:text-4xl font-extrabold text-creamText leading-tight">Product Migration & Web Configuration</h3>
+                        <p class="text-slateGray text-sm md:text-base font-light leading-relaxed">
+                            Managed massive catalog items migrations. Configured seasonal lists tags, verified domain redirection tables, resolved product indexing rules, and performed visual site responsive tests.
+                        </p>
+                        <div class="flex flex-wrap gap-2 text-[10px] font-bold text-cyberBlue uppercase tracking-widest font-display">
+                            <span>#Bulk_Migrations</span> • <span>#HTML_CSS</span> • <span>#Catalog_Data</span> • <span>#SSL_Auditing</span>
+                        </div>
+                    </div>
+                    <!-- Visual Mockup Column (Right) -->
+                    <div class="lg:col-span-6 order-1 lg:order-2">
+                        <div class="tilt-card p-6 rounded-[2.5rem] bg-[#FF4500]/5 border border-mintGlow/10 relative overflow-hidden group shadow-2xl preserve-3d">
+                            <!-- Bulk Migration panel -->
+                            <div class="rounded-2xl border border-mintGlow/10 bg-white shadow-2xl overflow-hidden font-sans text-xs">
+                                <div class="bg-[#FFF1ED] px-4 py-3 border-b border-mintGlow/10 flex items-center justify-between">
+                                    <span class="text-[9px] uppercase tracking-widest font-bold text-[#2D1E19]">Migration Terminal</span>
+                                    <span class="text-[9px] text-mintGlow font-bold">100% Complete</span>
+                                </div>
+                                <div class="p-6 bg-white space-y-4">
+                                    <div class="space-y-1">
+                                        <div class="flex justify-between text-[10px] text-slateGray"><span>Migrated Items:</span><span class="font-mono text-mintGlow">2,450 / 2,450</span></div>
+                                        <div class="h-1.5 bg-[#FF4500]/10 overflow-hidden rounded-full">
+                                            <div class="h-full bg-mintGlow w-full"></div>
+                                        </div>
+                                    </div>
+                                    <div class="grid grid-cols-2 gap-3 text-[10px]">
+                                        <div class="p-2.5 rounded-xl bg-[#FFFDFB] border border-mintGlow/10">
+                                            <span class="text-slateGray text-[8px] uppercase block font-bold">SSL Status</span>
+                                            <span class="font-bold text-[#2D1E19] mt-1 block">48 Sites Checked</span>
+                                        </div>
+                                        <div class="p-2.5 rounded-xl bg-[#FFFDFB] border border-mintGlow/10">
+                                            <span class="text-slateGray text-[8px] uppercase block font-bold">Catalog Links</span>
+                                            <span class="font-bold text-mintGlow mt-1 block">Updated OK</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- 7. Services Section (Bento Visual Grid Layout) -->
+    <section id="services" class="py-32 border-t border-mintGlow/5">
+        <div class="max-w-7xl mx-auto px-8">
+            
+            <!-- Header -->
+            <div class="max-w-2xl mb-20 space-y-4 reveal-node font-display">
+                <div class="flex items-center gap-2 text-mintGlow font-bold text-[10px] uppercase tracking-widest">
+                    <span class="w-6 h-0.5 bg-mintGlow"></span>
+                    What I Do
+                </div>
+                <h2 class="text-4xl lg:text-5xl font-extrabold tracking-tight leading-tight text-creamText">
+                    Professional Services.
+                </h2>
+                <p class="text-slateGray font-light text-sm md:text-base leading-relaxed font-sans">
+                    Offering front-end page development, e-commerce catalog compilation, storefront styling, and network operations telemetry tracking.
+                </p>
+            </div>
+
+            <!-- Bento Services Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-8 reveal-node">
+                
+                <!-- Service 1: Website Design -->
+                <div class="md:col-span-6 lg:col-span-4 p-8 rounded-[2.5rem] glass-panel-3d transition-all duration-300 group flex flex-col justify-between hover-lift-3d">
+                    <div>
+                        <div class="flex justify-between items-start mb-8">
+                            <div class="w-10 h-10 rounded-xl bg-mintGlow/10 text-mintGlow flex items-center justify-center group-hover:scale-105 transition-transform"><i data-lucide="palette" class="w-5 h-5"></i></div>
+                            <span class="text-3xl font-extrabold text-mintGlow/10 group-hover:text-mintGlow/20 transition-colors">01</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-creamText mb-3 uppercase tracking-wide">Website Design</h3>
+                        <p class="text-slateGray text-xs font-light leading-relaxed">
+                            Developing visual web drafts, wireframes, and design themes that optimize responsive dimensions grids layouts.
+                        </p>
+                    </div>
+                    <!-- Visual Widget: Abstract Wireframe -->
+                    <div class="mt-6 h-28 rounded-2xl bg-gradient-to-tr from-[#FFFDFB] to-[#FFEBE5] border border-mintGlow/10 flex items-center justify-center relative overflow-hidden group-hover:border-mintGlow/30 transition-colors">
+                        <div class="absolute inset-0 opacity-[0.03] bg-[radial-gradient(#FF4500_1px,transparent_1px)] [background-size:8px_8px]"></div>
+                        <div class="absolute top-2 left-2 right-2 h-1 border-b border-dashed border-mintGlow/20"></div>
+                        <div class="absolute top-2 bottom-2 left-2 w-1 border-r border-dashed border-mintGlow/20"></div>
+                        <div class="w-16 h-10 border border-mintGlow/30 rounded-lg flex items-center justify-center bg-white/50 shadow-sm relative group-hover:scale-105 transition-transform duration-300">
+                            <span class="text-[8px] text-mintGlow/60 font-semibold font-mono">Hero</span>
+                        </div>
+                        <div class="w-8 h-8 rounded-full border border-cyberBlue/40 bg-white/40 absolute right-10 top-6 group-hover:translate-x-1 transition-transform duration-300"></div>
+                    </div>
+                </div>
+
+                <!-- Service 2: Frontend Development (2 columns wide) -->
+                <div class="md:col-span-6 lg:col-span-8 p-8 rounded-[2.5rem] glass-panel-3d transition-all duration-300 group flex flex-col justify-between hover-lift-3d">
+                    <div>
+                        <div class="flex justify-between items-start mb-8">
+                            <div class="w-10 h-10 rounded-xl bg-mintGlow/10 text-mintGlow flex items-center justify-center group-hover:scale-105 transition-transform"><i data-lucide="code" class="w-5 h-5"></i></div>
+                            <span class="text-3xl font-extrabold text-mintGlow/10 group-hover:text-mintGlow/20 transition-colors">02</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-creamText mb-3 uppercase tracking-wide">Frontend Development</h3>
+                        <p class="text-slateGray text-xs font-light leading-relaxed">
+                            Writing clean semantic HTML, responsive stylesheets, and clean interactive JavaScript assets. Aligning page visual elements.
+                        </p>
+                    </div>
+                    <!-- Visual Widget: Mini Code IDE -->
+                    <div class="mt-6 p-4 rounded-2xl bg-[#2D1E19] text-white/90 font-mono text-[10px] space-y-1.5 border border-white/10 shadow-2xl relative overflow-hidden group-hover:border-mintGlow/30 transition-colors w-full text-left">
+                        <div class="flex items-center justify-between pb-2 border-b border-white/5 mb-1.5">
+                            <div class="flex items-center gap-1.5">
+                                <span class="w-2 h-2 rounded-full bg-red-500"></span>
+                                <span class="w-2 h-2 rounded-full bg-yellow-500"></span>
+                                <span class="w-2 h-2 rounded-full bg-green-500"></span>
+                            </div>
+                            <span class="text-[8px] text-slate-400 font-sans tracking-wide">app.js</span>
+                        </div>
+                        <div><span class="text-orange-400">const</span> <span class="text-blue-400">renderInterface</span> = () =&gt; {</div>
+                        <div class="pl-4"><span class="text-orange-400">return</span> <span class="text-green-400">`</span></div>
+                        <div class="pl-8 text-green-300">&lt;<span class="text-orange-400">section</span> <span class="text-cyan-400">class</span>=<span class="text-yellow-300">"grid-3d glow-effect"</span>&gt;</div>
+                        <div class="pl-12 text-green-300">&lt;<span class="text-orange-400">div</span>&gt;Interactive Element&lt;/<span class="text-orange-400">div</span>&gt;</div>
+                        <div class="pl-8 text-green-300">&lt;/<span class="text-orange-400">section</span>&gt;<span class="text-green-400">`</span>;</div>
+                        <div class="pl-2">};</div>
+                    </div>
+                </div>
+
+                <!-- Service 3: Website Maintenance -->
+                <div class="md:col-span-6 lg:col-span-4 p-8 rounded-[2.5rem] glass-panel-3d transition-all duration-300 group flex flex-col justify-between hover-lift-3d">
+                    <div>
+                        <div class="flex justify-between items-start mb-8">
+                            <div class="w-10 h-10 rounded-xl bg-mintGlow/10 text-mintGlow flex items-center justify-center group-hover:scale-105 transition-transform"><i data-lucide="settings" class="w-5 h-5"></i></div>
+                            <span class="text-3xl font-extrabold text-mintGlow/10 group-hover:text-mintGlow/20 transition-colors">03</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-creamText mb-3 uppercase tracking-wide">Website Maintenance</h3>
+                        <p class="text-slateGray text-xs font-light leading-relaxed">
+                            Auditing domain visual indexes, verifying redirects codes, updating active SSL keys, and debugging page errors.
+                        </p>
+                    </div>
+                    <!-- Visual Widget: System Diagnostics status -->
+                    <div class="mt-6 p-4 rounded-2xl bg-white/50 border border-mintGlow/10 flex flex-col gap-3 relative overflow-hidden group-hover:border-mintGlow/30 transition-colors text-left">
+                        <div class="flex items-center justify-between text-[9px] uppercase tracking-wider font-bold text-creamText">
+                            <span>Diagnostic Feed</span>
+                            <span class="text-green-600 animate-pulse flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-green-500"></span>Online</span>
+                        </div>
+                        <div class="space-y-2 text-[8px] font-mono text-slateGray">
+                            <div class="flex items-center justify-between font-sans"><span>SSL Certification:</span> <span class="text-green-600 font-bold">SECURE (SHA-256)</span></div>
+                            <div class="flex items-center justify-between font-sans"><span>Layout Shift Score:</span> <span class="text-green-600 font-bold">0.01 (Excellent)</span></div>
+                            <div class="flex items-center justify-between font-sans"><span>Redirect Diagnostics:</span> <span class="text-mintGlow font-bold">100% Correct</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Service 4: UI/UX Redesigns -->
+                <div class="md:col-span-6 lg:col-span-4 p-8 rounded-[2.5rem] glass-panel-3d transition-all duration-300 group flex flex-col justify-between hover-lift-3d">
+                    <div>
+                        <div class="flex justify-between items-start mb-8">
+                            <div class="w-10 h-10 rounded-xl bg-mintGlow/10 text-mintGlow flex items-center justify-center group-hover:scale-105 transition-transform"><i data-lucide="smile" class="w-5 h-5"></i></div>
+                            <span class="text-3xl font-extrabold text-mintGlow/10 group-hover:text-mintGlow/20 transition-colors">04</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-creamText mb-3 uppercase tracking-wide">UI/UX Redesigns</h3>
+                        <p class="text-slateGray text-xs font-light leading-relaxed">
+                            Improving page padding parameters, correcting overlapping elements, and styling visual items grids layout.
+                        </p>
+                    </div>
+                    <!-- Visual Widget: Layout Alignment indicator -->
+                    <div class="mt-6 h-28 rounded-2xl bg-gradient-to-br from-[#FFFDFB] to-[#FFEBE5] border border-mintGlow/10 flex items-center justify-center gap-4 relative overflow-hidden group-hover:border-mintGlow/30 transition-colors">
+                        <div class="w-16 h-16 rounded-xl border border-mintGlow/10 bg-white/70 relative flex items-center justify-center">
+                            <div class="w-10 h-10 rounded-lg border border-dashed border-mintGlow/30 flex items-center justify-center bg-[#FF4500]/5">
+                                <i data-lucide="align-center" class="w-4 h-4 text-mintGlow"></i>
+                            </div>
+                        </div>
+                        <div class="w-12 h-16 rounded-xl border border-mintGlow/10 bg-white/40 flex flex-col items-center justify-center gap-1.5">
+                            <span class="w-6 h-1.5 bg-mintGlow/20 rounded"></span>
+                            <span class="w-8 h-1.5 bg-mintGlow/20 rounded"></span>
+                            <span class="w-4 h-1.5 bg-mintGlow/40 rounded"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Service 5: Responsive Layouts -->
+                <div class="md:col-span-6 lg:col-span-4 p-8 rounded-[2.5rem] glass-panel-3d transition-all duration-300 group flex flex-col justify-between hover-lift-3d">
+                    <div>
+                        <div class="flex justify-between items-start mb-8">
+                            <div class="w-10 h-10 rounded-xl bg-mintGlow/10 text-mintGlow flex items-center justify-center group-hover:scale-105 transition-transform"><i data-lucide="smartphone" class="w-5 h-5"></i></div>
+                            <span class="text-3xl font-extrabold text-mintGlow/10 group-hover:text-mintGlow/20 transition-colors">05</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-creamText mb-3 uppercase tracking-wide">Responsive Layouts</h3>
+                        <p class="text-slateGray text-xs font-light leading-relaxed">
+                            Configuring dynamic visual viewport styles rules to ensure uniform presentation on desktops, tablets, and mobile devices.
+                        </p>
+                    </div>
+                    <!-- Visual Widget: Device Scale -->
+                    <div class="mt-6 h-28 rounded-2xl bg-gradient-to-tr from-[#FFFDFB] to-[#FFEBE5] border border-mintGlow/10 flex items-center justify-center gap-5 relative overflow-hidden group-hover:border-mintGlow/30 transition-colors">
+                        <div class="flex items-end gap-3.5">
+                            <div class="w-14 h-10 border border-mintGlow/30 rounded bg-white flex items-center justify-center shadow-sm hover-lift-3d"><i data-lucide="monitor" class="w-4 h-4 text-mintGlow"></i></div>
+                            <div class="w-8 h-8 border border-cyberBlue/30 rounded bg-white flex items-center justify-center shadow-sm hover-lift-3d"><i data-lucide="tablet" class="w-3.5 h-3.5 text-cyberBlue"></i></div>
+                            <div class="w-5 h-6 border border-mintGlow/30 rounded bg-white flex items-center justify-center shadow-sm hover-lift-3d"><i data-lucide="smartphone" class="w-3 h-3 text-mintGlow"></i></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Service 6: Bulk Catalog Uploads (Full grid row banner) -->
+                <div class="md:col-span-12 p-8 rounded-[2.5rem] glass-panel-3d transition-all duration-300 group flex flex-col justify-between hover-lift-3d">
+                    <div>
+                        <div class="flex justify-between items-start mb-6">
+                            <div class="w-10 h-10 rounded-xl bg-mintGlow/10 text-mintGlow flex items-center justify-center group-hover:scale-105 transition-transform"><i data-lucide="database-zap" class="w-5 h-5"></i></div>
+                            <span class="text-3xl font-extrabold text-mintGlow/10 group-hover:text-mintGlow/20 transition-colors">06</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-creamText mb-3 uppercase tracking-wide">Bulk Catalog Uploads</h3>
+                        <p class="text-slateGray text-xs font-light leading-relaxed">
+                            Compiling inventory datasets lists, configuring seasonal store items categories details, and executing database uploads.
+                        </p>
+                    </div>
+                    <!-- Visual Widget: Migration Progress Terminal -->
+                    <div class="mt-6 p-6 rounded-2xl bg-white/70 border border-mintGlow/10 flex flex-col md:flex-row items-center justify-between gap-6 relative overflow-hidden group-hover:border-mintGlow/30 transition-colors w-full">
+                        <div class="space-y-4 w-full md:w-1/2 text-left">
+                            <div class="flex justify-between items-center text-[10px] font-bold text-creamText uppercase tracking-wider">
+                                <span>Data Migration Desk</span>
+                                <span class="text-mintGlow">2,450 Rows Migrated</span>
+                            </div>
+                            <div class="h-2 bg-[#FF4500]/10 overflow-hidden rounded-full relative w-full">
+                                <div class="h-full bg-gradient-to-r from-mintGlow to-cyberBlue w-[92%] rounded-full animate-pulse"></div>
+                            </div>
+                            <div class="flex items-center gap-4 text-[9px] text-slateGray">
+                                <span class="flex items-center gap-1"><i data-lucide="check-circle" class="w-3 h-3 text-green-500"></i> Categories mapped</span>
+                                <span class="flex items-center gap-1"><i data-lucide="check-circle" class="w-3 h-3 text-green-500"></i> Image anchors synced</span>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-3 gap-3 w-full md:w-auto flex-shrink-0 text-[9px]">
+                            <div class="p-3.5 rounded-xl bg-white/90 border border-mintGlow/10 text-center flex flex-col items-center shadow-sm">
+                                <i data-lucide="file-spreadsheet" class="w-4 h-4 text-mintGlow mb-1.5"></i>
+                                <span class="font-bold text-creamText">12 Excel Catalogs</span>
+                            </div>
+                            <div class="p-3.5 rounded-xl bg-white/90 border border-mintGlow/10 text-center flex flex-col items-center shadow-sm">
+                                <i data-lucide="database" class="w-4 h-4 text-blue-600 mb-1.5"></i>
+                                <span class="font-bold text-creamText">Data Schemas</span>
+                            </div>
+                            <div class="p-3.5 rounded-xl bg-white/90 border border-mintGlow/10 text-center flex flex-col items-center shadow-sm">
+                                <i data-lucide="image" class="w-4 h-4 text-green-600 mb-1.5"></i>
+                                <span class="font-bold text-creamText">Store Assets</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- 8. Achievements Section (3D Glass Cards) -->
+    <section id="achievements" class="py-32 border-t border-mintGlow/5">
+        <div class="max-w-7xl mx-auto px-8">
+            
+            <!-- Header -->
+            <div class="max-w-2xl mb-20 space-y-4 reveal-node font-display">
+                <div class="flex items-center gap-2 text-mintGlow font-bold text-[10px] uppercase tracking-widest">
+                    <span class="w-6 h-0.5 bg-mintGlow"></span>
+                    Professional Milestones
+                </div>
+                <h2 class="text-4xl lg:text-5xl font-extrabold tracking-tight leading-tight text-creamText">
+                    Key Achievements
+                </h2>
+                <p class="text-slateGray font-light text-sm md:text-base leading-relaxed font-sans">
+                    Key benchmarks, certifications, and operational results accomplished during my work journey.
+                </p>
+            </div>
+
+            <!-- Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 reveal-node">
+                
+                <!-- Card 1 -->
+                <div class="p-8 rounded-[2rem] glass-panel-3d relative overflow-hidden group shadow-2xl hover-lift-3d">
+                    <div class="absolute -right-4 -bottom-4 opacity-[0.03] text-creamText"><i data-lucide="award" class="w-24 h-24"></i></div>
+                    <div class="w-10 h-10 rounded-xl bg-mintGlow/5 text-mintGlow flex items-center justify-center mb-6"><i data-lucide="graduation-cap" class="w-5 h-5 text-mintGlow animate-bounce"></i></div>
+                    <span class="text-[9px] font-extrabold uppercase text-mintGlow tracking-widest">Certification</span>
+                    <h3 class="text-lg font-bold text-creamText mt-2">Completed Claude 101 Course</h3>
+                    <p class="text-slateGray text-xs mt-3 leading-relaxed font-light font-sans">
+                        Certified in advanced prompt designs, layout integrations structures, and modular visual API configurations.
+                    </p>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="p-8 rounded-[2rem] glass-panel-3d relative overflow-hidden group shadow-2xl hover-lift-3d">
+                    <div class="absolute -right-4 -bottom-4 opacity-[0.03] text-creamText"><i data-lucide="rocket" class="w-24 h-24"></i></div>
+                    <div class="w-10 h-10 rounded-xl bg-mintGlow/5 text-mintGlow flex items-center justify-center mb-6"><i data-lucide="rocket" class="w-5 h-5 text-mintGlow"></i></div>
+                    <span class="text-[9px] font-extrabold uppercase text-mintGlow tracking-widest">Launches</span>
+                    <h3 class="text-lg font-bold text-creamText mt-2">Florist Website Launches</h3>
+                    <p class="text-slateGray text-xs mt-3 leading-relaxed font-light font-sans">
+                        Completed directories visual visual files and layouts themes customization configurations for e-commerce floristry clients.
+                    </p>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="p-8 rounded-[2rem] glass-panel-3d relative overflow-hidden group shadow-2xl hover-lift-3d">
+                    <div class="absolute -right-4 -bottom-4 opacity-[0.03] text-creamText"><i data-lucide="database" class="w-24 h-24"></i></div>
+                    <div class="w-10 h-10 rounded-xl bg-mintGlow/5 text-mintGlow flex items-center justify-center mb-6"><i data-lucide="database" class="w-5 h-5 text-mintGlow"></i></div>
+                    <span class="text-[9px] font-extrabold uppercase text-mintGlow tracking-widest">Data Operations</span>
+                    <h3 class="text-lg font-bold text-creamText mt-2">1,000+ Products Uploaded</h3>
+                    <p class="text-slateGray text-xs mt-3 leading-relaxed font-light font-sans">
+                        Successfully managed catalog item bulk entries compilations, price variables sheets, and online store visual presentations.
+                    </p>
+                </div>
+
+                <!-- Card 4 (Spanning) -->
+                <div class="p-8 md:p-10 rounded-[2.5rem] glass-panel-3d relative overflow-hidden group col-span-1 md:col-span-2 lg:col-span-3 shadow-2xl hover-lift-3d">
+                    <div class="flex flex-col md:flex-row items-start md:items-center gap-6">
+                        <div class="w-12 h-12 rounded-xl bg-mintGlow/5 text-mintGlow flex items-center justify-center flex-shrink-0"><i data-lucide="shield-check" class="w-6 h-6 text-mintGlow"></i></div>
+                        <div>
+                            <span class="text-[9px] font-extrabold uppercase text-mintGlow tracking-widest">Auditing</span>
+                            <h3 class="text-xl font-bold text-creamText mt-1">SEO Audits, SSL Configurations & CSS Responsive Edits</h3>
+                            <p class="text-slateGray text-xs mt-2 leading-relaxed font-light font-sans">
+                                Audited secure SSL keys, completed domain redirects layouts checks, verified index parameters schemas, and applied visual overrides to resolve mobile device layout shifts.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+
+
+    <!-- 10. Contact Section (Business-focused 3D Glass Form) -->
+    <section id="contact" class="py-32 relative overflow-hidden border-t border-mintGlow/5">
+        <div class="max-w-7xl mx-auto px-8 relative z-10">
+            
+            <div class="glass-panel-3d rounded-[3rem] p-10 md:p-20 grid grid-cols-1 lg:grid-cols-12 gap-16 items-start relative overflow-hidden shadow-2xl">
+                <div class="absolute bottom-0 right-0 w-96 h-96 bg-mintGlow/5 blur-[120px] rounded-full pointer-events-none"></div>
+
+                <!-- Left Column info -->
+                <div class="lg:col-span-5 space-y-8 font-display">
+                    <div class="space-y-4">
+                        <div class="flex items-center gap-2 text-mintGlow font-extrabold text-[10px] uppercase tracking-widest">
+                            <span class="w-6 h-0.5 bg-mintGlow"></span>
+                            Get In Touch
+                        </div>
+                        <h2 class="text-4xl lg:text-5xl font-extrabold tracking-tight text-creamText leading-tight">
+                            Start a project.
+                        </h2>
+                        <p class="text-slateGray font-sans font-light text-sm leading-relaxed">
+                            Whether you are a hiring lead looking to verify B.Sc Computer Science credentials, a tech manager seeking a junior web developer, or an agency looking to optimize web interfaces, drop a message.
+                        </p>
+                    </div>
+
+                    <!-- Direct info list -->
+                    <div class="space-y-4 font-sans text-xs">
+                        
+                        <!-- Email -->
+                        <div class="p-5 rounded-2xl bg-[#FFFDFB] border border-mintGlow/10 hover:border-mintGlow hover:bg-white transition-all duration-300 flex items-center gap-4 shadow-sm">
+                            <div class="w-9 h-9 rounded-xl bg-mintGlow/10 text-mintGlow flex items-center justify-center flex-shrink-0"><i data-lucide="mail" class="w-5 h-5"></i></div>
+                            <div>
+                                <div class="text-[9px] text-[#2D1E19]/40 font-display font-bold uppercase tracking-wider">Email Address</div>
+                                <a href="mailto:deepakinbox87@gmail.com" class="font-bold text-[#2D1E19] hover:text-mintGlow transition-colors">deepakinbox87@gmail.com</a>
+                            </div>
+                        </div>
+
+                        <!-- Phone -->
+                        <div class="p-5 rounded-2xl bg-[#FFFDFB] border border-mintGlow/10 hover:border-mintGlow hover:bg-white transition-all duration-300 flex items-center gap-4 shadow-sm">
+                            <div class="w-9 h-9 rounded-xl bg-mintGlow/10 text-mintGlow flex items-center justify-center flex-shrink-0"><i data-lucide="phone" class="w-5 h-5"></i></div>
+                            <div>
+                                <div class="text-[9px] text-[#2D1E19]/40 font-display font-bold uppercase tracking-wider">Phone number</div>
+                                <a href="tel:6374268144" class="font-bold text-[#2D1E19] hover:text-mintGlow transition-colors">6374268144</a>
+                            </div>
+                        </div>
+
+                        <!-- Networks -->
+                        <div class="p-5 rounded-2xl bg-[#FFFDFB] border border-mintGlow/10 hover:border-mintGlow hover:bg-white transition-all duration-300 flex items-center gap-4 shadow-sm">
+                            <div class="w-9 h-9 rounded-xl bg-mintGlow/10 text-mintGlow flex items-center justify-center flex-shrink-0"><i data-lucide="share-2" class="w-5 h-5"></i></div>
+                            <div>
+                                <div class="text-[9px] text-[#2D1E19]/40 font-display font-bold uppercase tracking-wider">Professional Networks</div>
+                                <div class="flex items-center gap-4 mt-1 font-display font-bold">
+                                    <a href="https://www.linkedin.com/in/deepak23official/" target="_blank" rel="noopener noreferrer" class="text-slateGray hover:text-mintGlow transition-colors flex items-center gap-1">
+                                        <i class="fa-brands fa-linkedin text-xs"></i> LinkedIn
+                                    </a>
+                                    <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="text-slateGray hover:text-mintGlow transition-colors flex items-center gap-1">
+                                        <i class="fa-brands fa-github text-xs"></i> GitHub
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Right Form column -->
+                <div class="lg:col-span-7 w-full font-display">
+                    <div class="p-8 md:p-10 rounded-[2.5rem] bg-white/70 border border-mintGlow/10 shadow-2xl relative">
+                        
+                        <form id="contact-form" class="space-y-6 text-xs animate-reveal" onsubmit="handleFormSubmit(event)">
+                            
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <!-- Name -->
+                                <div class="space-y-2">
+                                    <label for="form-name" class="text-[9px] text-[#2D1E19]/50 uppercase font-bold tracking-widest">Your Name</label>
+                                    <input type="text" id="form-name" required placeholder="e.g. John Doe" class="w-full bg-transparent border-b border-[#2D1E19]/10 pb-3 text-[#2D1E19] focus:outline-none focus:border-mintGlow transition-colors placeholder:text-gray-400">
+                                </div>
+                                <!-- Email -->
+                                <div class="space-y-2">
+                                    <label for="form-email" class="text-[9px] text-[#2D1E19]/50 uppercase font-bold tracking-widest">Email Address</label>
+                                    <input type="email" id="form-email" required placeholder="e.g. john@example.com" class="w-full bg-transparent border-b border-[#2D1E19]/10 pb-3 text-[#2D1E19] focus:outline-none focus:border-mintGlow transition-colors placeholder:text-gray-400">
+                                </div>
+                            </div>
+
+                            <!-- Subject -->
+                            <div class="space-y-2">
+                                <label for="form-subject" class="text-[9px] text-[#2D1E19]/50 uppercase font-bold tracking-widest">Subject Reference</label>
+                                <input type="text" id="form-subject" required placeholder="e.g. Hiring / Database Configuration Project" class="w-full bg-transparent border-b border-[#2D1E19]/10 pb-3 text-[#2D1E19] focus:outline-none focus:border-mintGlow transition-colors placeholder:text-gray-400">
+                            </div>
+
+                            <!-- Message -->
+                            <div class="space-y-2">
+                                <label for="form-message" class="text-[9px] text-[#2D1E19]/50 uppercase font-bold tracking-widest">Message Details</label>
+                                <textarea id="form-message" rows="4" required placeholder="Outline layout checks, systems coordinates, or catalog visual setups..." class="w-full bg-transparent border-b border-[#2D1E19]/10 pb-3 text-[#2D1E19] focus:outline-none focus:border-mintGlow transition-colors placeholder:text-gray-400"></textarea>
+                            </div>
+
+                            <!-- Submit -->
+                            <button type="submit" class="w-full py-4 rounded-full bg-gradient-to-r from-mintGlow to-cyberBlue text-white font-bold text-[10px] tracking-widest uppercase transition-all duration-300 hover:scale-[1.01] hover:shadow-2xl">
+                                Transmit Message
+                            </button>
+
+                        </form>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- 11. Footer -->
+    <footer class="py-16 text-slateGray text-center text-xs select-none relative overflow-hidden border-t border-mintGlow/5">
+        <div class="max-w-7xl mx-auto px-8 flex flex-col md:flex-row items-center justify-between gap-8 relative z-10">
+            
+            <!-- Branding -->
+            <a href="#home" class="flex items-center gap-3 group">
+                <div class="w-8 h-8 rounded-lg bg-gradient-to-tr from-mintGlow to-cyberBlue flex items-center justify-center shadow-md">
+                    <i data-lucide="code" class="w-4 h-4 text-white"></i>
+                </div>
+                <span class="font-mono font-bold text-xs text-[#2D1E19] tracking-tight transition-colors duration-300 group-hover:text-mintGlow">&lt;deepak.m<span class="text-mintGlow">/</span>&gt;</span>
+            </a>
+            
+            <p class="font-light text-[10px] text-slateGray font-sans tracking-wide">
+                &copy; 2026 Deepak M. All rights reserved.
+            </p>
+
+            <!-- Social Coordinates -->
+            <div class="flex items-center gap-4 text-slateGray hover:text-mintGlow">
+                <a href="https://www.linkedin.com/in/deepak23official/" target="_blank" rel="noopener noreferrer" class="hover:text-mintGlow transition-colors"><i class="fa-brands fa-linkedin text-base"></i></a>
+                <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="hover:text-mintGlow transition-colors"><i class="fa-brands fa-github text-base"></i></a>
+            </div>
+        </div>
+
+        <!-- Outlined Typography branding background -->
+        <div class="max-w-7xl mx-auto px-8 pt-12 overflow-hidden pointer-events-none select-none">
+            <h2 class="text-7xl sm:text-9xl md:text-[10rem] font-extrabold text-stroke-white opacity-60 select-none leading-none tracking-tight">DEEPAK M</h2>
+        </div>
+    </footer>
+
+    <!-- Form Response success modal -->
+    <div id="form-modal" class="fixed inset-0 z-50 flex items-center justify-center px-4 bg-[#2D1E19]/60 backdrop-blur-md hidden">
+        <div class="max-w-md w-full rounded-[2.5rem] border border-mintGlow/10 bg-white p-8 text-center space-y-6 shadow-2xl relative font-display text-xs text-[#2D1E19]">
+            <button onclick="closeModal()" class="absolute top-4 right-4 text-slateGray hover:text-mintGlow transition-colors">
+                <i data-lucide="x" class="w-5 h-5"></i>
+            </button>
+            <div class="w-12 h-12 rounded-full bg-mintGlow/10 border border-mintGlow/20 text-mintGlow flex items-center justify-center mx-auto animate-bounce">
+                <i class="fa-brands fa-whatsapp text-2xl text-green-500"></i>
+            </div>
+            <div class="space-y-2">
+                <h3 class="text-xl font-bold text-[#2D1E19] tracking-wide">Message Formatted</h3>
+                <p class="text-slateGray font-sans font-light leading-relaxed">Redirecting you to WhatsApp to send your message directly to Deepak. If pop-ups are blocked, please use the button below.</p>
+            </div>
+            <a id="whatsapp-submit-btn" href="#" target="_blank" onclick="closeModal()" class="w-full py-3.5 rounded-full bg-gradient-to-r from-mintGlow to-cyberBlue text-white font-bold tracking-widest text-[10px] uppercase block text-center shadow-lg">
+                Send via WhatsApp
+            </a>
+        </div>
+    </div>
+
+    <!-- Resume Download Alert Modal -->
+    <div id="resume-modal" class="fixed inset-0 z-50 flex items-center justify-center px-4 bg-[#2D1E19]/60 backdrop-blur-md hidden">
+        <div class="max-w-md w-full rounded-[2.5rem] border border-mintGlow/10 bg-white p-8 text-center space-y-6 shadow-2xl relative font-display text-xs text-[#2D1E19]">
+            <button onclick="closeResumeModal()" class="absolute top-4 right-4 text-slateGray hover:text-mintGlow transition-colors">
+                <i data-lucide="x" class="w-5 h-5"></i>
+            </button>
+            <div class="w-12 h-12 rounded-full bg-mintGlow/10 border border-mintGlow/20 text-mintGlow flex items-center justify-center mx-auto"><i data-lucide="file-text" class="w-6 h-6"></i></div>
+            <div class="space-y-2">
+                <h3 class="text-xl font-bold text-[#2D1E19] tracking-wide">Resume Download Setup</h3>
+                <p class="text-slateGray font-sans font-light leading-relaxed">The download target path is set at `assets/resume.pdf`. You can redirect directly to external profiles.</p>
+            </div>
+            <div class="flex flex-col gap-3 font-bold tracking-wider pt-2">
+                <a href="https://www.linkedin.com/in/deepak23official/" target="_blank" rel="noopener noreferrer" class="w-full py-3.5 rounded-full bg-gradient-to-r from-mintGlow to-cyberBlue text-white text-center block text-[10px] uppercase transition-colors">
+                    View LinkedIn Profile
+                </a>
+                <button onclick="closeResumeModal()" class="w-full py-3.5 rounded-full bg-[#FF4500]/5 text-mintGlow hover:bg-white hover:border-mintGlow/20 text-[10px] border border-mintGlow/10 uppercase transition-colors font-bold">
+                    Go Back
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript logic -->
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // 1. Navbar shrink & background blur on scroll
+        const header = document.getElementById('site-header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 40) {
+                header.classList.add('bg-white/80', 'backdrop-blur-md', 'border-mintGlow/5', 'shadow-2xl');
+                header.classList.remove('bg-transparent', 'border-transparent');
+                header.classList.remove('h-24');
+                header.classList.add('h-20');
+            } else {
+                header.classList.remove('bg-white/80', 'backdrop-blur-md', 'border-mintGlow/5', 'shadow-2xl');
+                header.classList.add('bg-transparent', 'border-transparent');
+                header.classList.remove('h-20');
+                header.classList.add('h-24');
+            }
+        });
+
+        // 2. Mobile hamburger menu toggler
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const hamburgerTop = document.getElementById('hamburger-top');
+        const hamburgerMid = document.getElementById('hamburger-mid');
+        const hamburgerBottom = document.getElementById('hamburger-bottom');
+
+        function toggleMobileMenu() {
+            mobileMenu.classList.toggle('translate-x-full');
+            hamburgerTop.classList.toggle('rotate-45');
+            hamburgerTop.classList.toggle('translate-y-1.5');
+            hamburgerMid.classList.toggle('opacity-0');
+            hamburgerBottom.classList.toggle('-rotate-45');
+            hamburgerBottom.classList.toggle('-translate-y-1.5');
+        }
+        menuBtn.addEventListener('click', toggleMobileMenu);
+
+
+
+        // 4. Reveal elements on scroll trigger
+        const revealElements = document.querySelectorAll('.reveal-node');
+        const revealOnScroll = () => {
+            const triggerBottom = window.innerHeight * 0.9;
+            revealElements.forEach(el => {
+                const boxTop = el.getBoundingClientRect().top;
+                if (boxTop < triggerBottom) {
+                    el.classList.add('active');
+                }
+            });
+        };
+        window.addEventListener('scroll', revealOnScroll);
+        revealOnScroll(); // Run on initial load
+
+        // 5. Scroll spy for navigation highlighting
+        const navLinks = document.querySelectorAll('.nav-link');
+        const sections = document.querySelectorAll('section');
+
+        window.addEventListener('scroll', () => {
+            let currentSec = "";
+            sections.forEach(sec => {
+                const secTop = sec.offsetTop;
+                if (window.scrollY >= (secTop - 140)) {
+                    currentSec = sec.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active-nav', 'text-mintGlow');
+                link.classList.add('text-slateGray');
+                if (link.getAttribute('href') === `#${currentSec}`) {
+                    link.classList.add('active-nav', 'text-mintGlow');
+                    link.classList.remove('text-slateGray');
+                }
+            });
+        });
+
+        // 6. Interactive timeline tab switcher
+        function switchRoleTab(targetId, buttonEl) {
+            const panes = document.querySelectorAll('.role-pane');
+            panes.forEach(pane => pane.classList.add('hidden'));
+            
+            document.getElementById(targetId).classList.remove('hidden');
+
+            const buttons = document.querySelectorAll('.role-tab-btn');
+            buttons.forEach(btn => {
+                btn.className = "role-tab-btn group text-left p-8 rounded-[2.5rem] bg-white border border-mintGlow/10 relative overflow-hidden transition-all duration-300 hover:bg-white hover:border-mintGlow/25 shadow-md";
+                const heading = btn.querySelector('h3');
+                if (heading) heading.className = "text-xl font-bold text-slateGray group-hover:text-[#2D1E19] transition-colors";
+                const text = btn.querySelector('p');
+                if (text) text.className = "text-xs text-slateGray/80 mt-2 font-light leading-relaxed";
+                const spans = btn.querySelectorAll('span');
+                spans.forEach(span => {
+                    if(span.innerHTML.includes('Present') || span.innerHTML.includes('Prior Operations')) {
+                        span.className = "text-[9px] font-bold text-slateGray bg-[#FF4500]/5 border border-mintGlow/10 px-3 py-1 rounded-full uppercase tracking-wider";
+                    }
+                });
+            });
+
+            buttonEl.className = "role-tab-btn group text-left p-8 rounded-[2.5rem] bg-gradient-to-r from-mintGlow to-cyberBlue border-none relative overflow-hidden transition-all duration-300 scale-[1.02] shadow-2xl";
+            const heading = buttonEl.querySelector('h3');
+            if (heading) heading.className = "text-xl font-bold text-white transition-colors";
+            const text = buttonEl.querySelector('p');
+            if (text) text.className = "text-xs text-white/80 mt-2 font-light leading-relaxed";
+            const spans = buttonEl.querySelectorAll('span');
+            spans.forEach(span => {
+                if(span.innerHTML.includes('Present') || span.innerHTML.includes('Prior Operations')) {
+                    span.className = "text-[9px] font-bold text-white bg-white/20 border border-white/30 px-3 py-1 rounded-full uppercase tracking-wider";
+                }
+            });
+        }
+
+        // 7. Javascript 3D Tilt Effect on cards
+        const tiltCards = document.querySelectorAll('.tilt-card');
+        tiltCards.forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.transition = 'transform 0.1s ease-out'; // Smooth entry transition
+            });
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                const xc = rect.width / 2;
+                const yc = rect.height / 2;
+                const angleX = (yc - y) / 20; // Reduced rotation factor for stability
+                const angleY = (x - xc) / 20;
+                card.style.transition = 'none'; // Prevent lag feedback loops (shaking/jitter)
+                card.style.transform = `perspective(1000px) rotateX(${angleX}deg) rotateY(${angleY}deg) scale3d(1.02, 1.02, 1.02)`;
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.transition = 'transform 0.5s cubic-bezier(0.25, 1, 0.5, 1)'; // Super smooth reset on leave
+                card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
+            });
+        });
+
+        // 8. Form submission processing
+        const formModal = document.getElementById('form-modal');
+        const whatsappSubmitBtn = document.getElementById('whatsapp-submit-btn');
+        
+        // --- WHATSAPP AUTOMATION KEY ---
+        // Once you receive your API key from CallMeBot, replace "YOUR_CALLMEBOT_API_KEY" below with it (e.g. "123456").
+        const CALLMEBOT_API_KEY = "YOUR_CALLMEBOT_API_KEY";
+        
+        function handleFormSubmit(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('form-name').value;
+            const email = document.getElementById('form-email').value;
+            const subject = document.getElementById('form-subject').value;
+            const message = document.getElementById('form-message').value;
+
+            // Formulate WhatsApp message text
+            const whatsappText = `Hi Deepak, my name is ${name}.\nEmail: ${email}\nSubject: ${subject}\n\nMessage:\n${message}`;
+            const encodedText = encodeURIComponent(whatsappText);
+            const whatsappUrl = `https://wa.me/916374268144?text=${encodedText}`;
+
+            // Set link href in modal button for fallback manual send
+            whatsappSubmitBtn.href = whatsappUrl;
+
+            // Show confirmation success modal
+            formModal.classList.remove('hidden');
+            formModal.classList.add('flex');
+            
+            // Check if API key has been filled in
+            if (CALLMEBOT_API_KEY && CALLMEBOT_API_KEY !== "YOUR_CALLMEBOT_API_KEY") {
+                const botUrl = `https://api.callmebot.com/whatsapp.php?phone=916374268144&text=${encodedText}&apikey=${CALLMEBOT_API_KEY}`;
+                
+                // Fetch in no-cors mode to send request to CallMeBot silently in the background
+                fetch(botUrl, { mode: 'no-cors' })
+                    .then(() => {
+                        console.log("WhatsApp message sent automatically in background.");
+                    })
+                    .catch(err => {
+                        console.error("Automated bot failed, falling back to manual redirect:", err);
+                        window.open(whatsappUrl, '_blank');
+                    });
+            } else {
+                // Fallback to manual window redirect if API key is not yet set
+                window.open(whatsappUrl, '_blank');
+            }
+            
+            document.getElementById('contact-form').reset();
+        }
+
+        function closeModal() {
+            formModal.classList.add('hidden');
+            formModal.classList.remove('flex');
+        }
+
+        // 9. CV modal control
+        const resumeModal = document.getElementById('resume-modal');
+        function triggerResumeModal() {
+            resumeModal.classList.remove('hidden');
+            resumeModal.classList.add('flex');
+        }
+        function closeResumeModal() {
+            resumeModal.classList.add('hidden');
+            resumeModal.classList.remove('flex');
+        }
+    </script>
+</body>
+</html>
