@@ -19,21 +19,21 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
     <style>
-        /* Non-Blue Emerald & Warm Gold System (Ultra Smooth Slower Animations & 100/100 Performance) */
+        /* Non-Blue Emerald & Warm Gold System (WCAG AA Compliant High-Contrast Palette) */
         :root {
             --bg-body: #121214;        /* Deep Charcoal */
             --bg-card: #1E1E24;        /* Dark Slate Card Surface */
             --bg-card-hover: #262630;  /* Interactive Card Surface */
-            --border-card: rgba(255, 255, 255, 0.1);
-            --border-highlight: #10B981;
+            --border-card: rgba(255, 255, 255, 0.12);
+            --border-highlight: #34D399;
             
-            --accent-emerald: #10B981;
-            --accent-gold: #F59E0B;
+            --accent-emerald: #34D399;
+            --accent-gold: #FBBF24;
             --accent-amber: #FBBF24;
             
             --text-primary: #FFFFFF;
-            --text-secondary: #A1A1AA;
-            --text-dim: #71717A;
+            --text-secondary: #D4D4D8;
+            --text-dim: #A1A1AA;
             --font-stack: 'Poppins', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             --ease-luxurious: cubic-bezier(0.22, 1, 0.36, 1);
         }
@@ -111,15 +111,15 @@
 
         /* Keyframe Pulse Animation for Profile Avatar */
         @keyframes emeraldPulse {
-            0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4); }
-            70% { box-shadow: 0 0 0 14px rgba(16, 185, 129, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+            0% { box-shadow: 0 0 0 0 rgba(52, 211, 153, 0.4); }
+            70% { box-shadow: 0 0 0 14px rgba(52, 211, 153, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(52, 211, 153, 0); }
         }
 
         /* Custom Scrollbar */
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: var(--bg-body); }
-        ::-webkit-scrollbar-thumb { background: rgba(16, 185, 129, 0.4); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb { background: rgba(52, 211, 153, 0.4); border-radius: 4px; }
         ::-webkit-scrollbar-thumb:hover { background: var(--accent-emerald); }
 
         .container {
@@ -147,7 +147,7 @@
             transform: translateY(-5px);
             border-color: var(--border-highlight);
             background-color: var(--bg-card-hover);
-            box-shadow: 0 16px 32px -12px rgba(16, 185, 129, 0.15);
+            box-shadow: 0 16px 32px -12px rgba(52, 211, 153, 0.15);
         }
 
         /* Badges */
@@ -161,9 +161,9 @@
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 0.04em;
-            background: rgba(16, 185, 129, 0.12);
-            border: 1px solid rgba(16, 185, 129, 0.35);
-            color: #10B981;
+            background: rgba(52, 211, 153, 0.15);
+            border: 1px solid rgba(52, 211, 153, 0.4);
+            color: #34D399;
             max-width: 100%;
             white-space: normal;
             line-height: 1.4;
@@ -175,9 +175,9 @@
         }
 
         .badge-gold {
-            background: rgba(245, 158, 11, 0.12);
-            border-color: rgba(245, 158, 11, 0.35);
-            color: #F59E0B;
+            background: rgba(251, 191, 36, 0.15);
+            border-color: rgba(251, 191, 36, 0.4);
+            color: #FBBF24;
         }
 
         /* Buttons */
@@ -202,29 +202,29 @@
         }
 
         .btn-primary {
-            color: #121214;
-            background: #10B981;
-            box-shadow: 0 4px 14px rgba(16, 185, 129, 0.3);
+            color: #0F172A;
+            background: #34D399;
+            box-shadow: 0 4px 14px rgba(52, 211, 153, 0.35);
         }
 
         .btn-primary:hover {
             transform: translateY(-2px);
-            background: #059669;
-            color: #FFFFFF;
-            box-shadow: 0 8px 22px rgba(16, 185, 129, 0.45);
+            background: #10B981;
+            color: #0F172A;
+            box-shadow: 0 8px 22px rgba(52, 211, 153, 0.5);
         }
 
         .btn-secondary {
             color: var(--text-primary);
-            background: rgba(255, 255, 255, 0.06);
-            border: 1px solid rgba(255, 255, 255, 0.18);
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.25);
         }
 
         .btn-secondary:hover {
-            background: rgba(255, 255, 255, 0.15);
+            background: rgba(255, 255, 255, 0.2);
             border-color: var(--accent-emerald);
             transform: translateY(-2px);
-            box-shadow: 0 6px 18px rgba(255, 255, 255, 0.1);
+            box-shadow: 0 6px 18px rgba(255, 255, 255, 0.15);
         }
 
         /* Navigation Header */
@@ -236,7 +236,7 @@
             z-index: 100;
             padding: 0.85rem 0;
             background: rgba(18, 18, 20, 0.95);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.12);
             transition: padding 0.3s ease, background-color 0.3s ease;
         }
 
@@ -267,11 +267,11 @@
             width: 2rem;
             height: 2rem;
             border-radius: 0.6rem;
-            background: #10B981;
+            background: #34D399;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #121214;
+            color: #0F172A;
             font-weight: 900;
             font-size: 0.85rem;
             transition: transform 0.3s ease;
@@ -307,12 +307,12 @@
             left: 0;
             width: 0;
             height: 2px;
-            background: #10B981;
+            background: #34D399;
             transition: width 0.3s ease;
         }
 
         .nav-link:hover, .nav-link.active {
-            color: #10B981;
+            color: #34D399;
         }
 
         .nav-link:hover::after, .nav-link.active::after {
@@ -359,12 +359,12 @@
             padding: 0.5rem 0;
             width: 100%;
             text-align: center;
-            border-bottom: 1px solid rgba(255,255,255,0.06);
+            border-bottom: 1px solid rgba(255,255,255,0.08);
             transition: color 0.25s ease, transform 0.25s ease;
         }
 
         .drawer a:hover {
-            color: #10B981;
+            color: #34D399;
             transform: translateX(4px);
         }
 
@@ -394,7 +394,7 @@
 
         .hero-sub {
             font-size: clamp(1rem, 2.5vw, 1.2rem);
-            color: #F59E0B;
+            color: #FBBF24;
             font-weight: 600;
             margin-bottom: 1rem;
         }
@@ -427,7 +427,7 @@
             margin: 0 auto 1rem;
             border-radius: 50%;
             padding: 4px;
-            background: #10B981;
+            background: #34D399;
             animation: emeraldPulse 3s infinite;
         }
 
@@ -485,7 +485,7 @@
         .stat-num {
             font-size: clamp(1.5rem, 3vw, 2rem);
             font-weight: 800;
-            color: #10B981;
+            color: #34D399;
         }
 
         .stat-lbl {
@@ -539,10 +539,10 @@
         }
 
         .tab-btn.active {
-            background: #10B981;
-            border-color: #10B981;
-            color: #121214;
-            box-shadow: 0 4px 14px rgba(16, 185, 129, 0.3);
+            background: #34D399;
+            border-color: #34D399;
+            color: #0F172A;
+            box-shadow: 0 4px 14px rgba(52, 211, 153, 0.35);
         }
 
         .timeline-box {
@@ -569,7 +569,7 @@
         .skill-card h3 {
             font-size: 1.1rem;
             margin-bottom: 0.85rem;
-            color: #F59E0B;
+            color: #FBBF24;
         }
 
         .skill-list {
@@ -613,7 +613,7 @@
             align-items: center;
             justify-content: space-between;
             padding-bottom: 0.5rem;
-            border-bottom: 1px solid rgba(255,255,255,0.06);
+            border-bottom: 1px solid rgba(255,255,255,0.08);
             margin-bottom: 0.75rem;
             font-size: 0.75rem;
             color: var(--text-dim);
@@ -650,15 +650,15 @@
 
         .contact-item:hover {
             transform: translateX(6px);
-            border-color: #10B981;
+            border-color: #34D399;
         }
 
         .contact-icon {
             width: 2.4rem;
             height: 2.4rem;
             border-radius: 0.75rem;
-            background: rgba(16, 185, 129, 0.15);
-            color: #10B981;
+            background: rgba(52, 211, 153, 0.15);
+            color: #34D399;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -821,13 +821,13 @@
 
                 <div class="nav-cta">
                     <button onclick="openModal('resume-modal')" class="btn btn-secondary" style="padding: 0.55rem 1.25rem; font-size: 0.75rem;">
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
                         Download CV
                     </button>
                 </div>
 
                 <button class="mobile-btn" id="drawer-toggle" aria-label="Toggle Navigation">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
                 </button>
             </nav>
         </div>
@@ -855,7 +855,7 @@
                         <h1 class="hero-h1">
                             Hi, I'm <span class="text-emerald">Deepak M</span>
                         </h1>
-                        <div class="hero-sub">Junior Web Developer & B.Sc Computer Science Graduate</div>
+                        <div class="hero-sub">Junior Web Developer &amp; B.Sc Computer Science Graduate</div>
 
                         <p class="hero-desc">
                             Building responsive web frontends, handling e-commerce catalog migration, and engineering fast web applications. Formerly Reliance Jio NOC telemetry engineer, now developing digital experiences at Hana Soft AI Solutions.
@@ -864,7 +864,7 @@
                         <div class="hero-buttons">
                             <a href="#projects" class="btn btn-primary">
                                 Explore Work
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
                             </a>
                             <a href="#contact" class="btn btn-secondary">Get In Touch</a>
                         </div>
@@ -872,10 +872,10 @@
 
                     <div class="profile-box reveal-right">
                         <div class="avatar-ring">
-                            <img src="my image.jpg" width="130" height="130" alt="Deepak M Profile" class="avatar-img" decoding="async" fetchpriority="high" onerror="this.src='https://ui-avatars.com/api/?name=Deepak+M&background=1E1E24&color=10B981'">
+                            <img src="my image.jpg" width="130" height="130" alt="Deepak M - Junior Web Developer Profile Picture" class="avatar-img" decoding="async" fetchpriority="high" onerror="this.src='https://ui-avatars.com/api/?name=Deepak+M&amp;background=1E1E24&amp;color=34D399'">
                         </div>
-                        <h3 style="font-size: 1.3rem; font-weight: 800; color: #FFFFFF;">Deepak M</h3>
-                        <p style="color: #F59E0B; font-size: 0.85rem; font-weight: 700; margin-top: 0.2rem;">Junior Web Developer</p>
+                        <h2 style="font-size: 1.3rem; font-weight: 800; color: #FFFFFF;">Deepak M</h2>
+                        <p style="color: #FBBF24; font-size: 0.85rem; font-weight: 700; margin-top: 0.2rem;">Junior Web Developer</p>
 
                         <div class="chips">
                             <span class="chip">HTML5 / CSS3</span>
@@ -887,7 +887,7 @@
                         </div>
 
                         <div style="margin-top: 1.25rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.08); font-size: 0.85rem; color: var(--text-secondary);">
-                            📞 <a href="tel:6374268144" style="color: inherit; text-decoration: none; font-weight: 600;">+91 6374268144</a>
+                            📞 <a href="tel:6374268144" style="color: inherit; text-decoration: none; font-weight: 600;" aria-label="Call Deepak M at +91 6374268144">+91 6374268144</a>
                         </div>
                     </div>
                 </div>
@@ -919,13 +919,13 @@
             <div class="container">
                 <div class="sec-head reveal">
                     <span class="badge">About Me</span>
-                    <h2>Background & Expertise</h2>
+                    <h2>Background &amp; Expertise</h2>
                     <p>Combining computer science fundamentals with hands-on web development and operations experience.</p>
                 </div>
 
                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.25rem;">
                     <div class="card reveal stagger-1" style="padding: 1.5rem;">
-                        <div style="width: 2.75rem; height: 2.75rem; border-radius: 0.75rem; background: rgba(16, 185, 129, 0.15); color: #10B981; display: flex; align-items: center; justify-content: center; margin-bottom: 1rem;">
+                        <div style="width: 2.75rem; height: 2.75rem; border-radius: 0.75rem; background: rgba(52, 211, 153, 0.15); color: #34D399; display: flex; align-items: center; justify-content: center; margin-bottom: 1rem;" aria-hidden="true">
                             🎓
                         </div>
                         <h3 style="font-size: 1.2rem; margin-bottom: 0.4rem; color: #FFFFFF;">B.Sc Computer Science</h3>
@@ -935,7 +935,7 @@
                     </div>
 
                     <div class="card reveal stagger-2" style="padding: 1.5rem;">
-                        <div style="width: 2.75rem; height: 2.75rem; border-radius: 0.75rem; background: rgba(245, 158, 11, 0.15); color: #F59E0B; display: flex; align-items: center; justify-content: center; margin-bottom: 1rem;">
+                        <div style="width: 2.75rem; height: 2.75rem; border-radius: 0.75rem; background: rgba(251, 191, 36, 0.15); color: #FBBF24; display: flex; align-items: center; justify-content: center; margin-bottom: 1rem;" aria-hidden="true">
                             💻
                         </div>
                         <h3 style="font-size: 1.2rem; margin-bottom: 0.4rem; color: #FFFFFF;">Jr Web Developer</h3>
@@ -945,7 +945,7 @@
                     </div>
 
                     <div class="card reveal stagger-3" style="padding: 1.5rem;">
-                        <div style="width: 2.75rem; height: 2.75rem; border-radius: 0.75rem; background: rgba(16, 185, 129, 0.15); color: #10B981; display: flex; align-items: center; justify-content: center; margin-bottom: 1rem;">
+                        <div style="width: 2.75rem; height: 2.75rem; border-radius: 0.75rem; background: rgba(52, 211, 153, 0.15); color: #34D399; display: flex; align-items: center; justify-content: center; margin-bottom: 1rem;" aria-hidden="true">
                             📡
                         </div>
                         <h3 style="font-size: 1.2rem; margin-bottom: 0.4rem; color: #FFFFFF;">Jio NOC Telemetry</h3>
@@ -975,26 +975,26 @@
                     <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 0.75rem; margin-bottom: 1.25rem; padding-bottom: 1rem; border-bottom: 1px solid rgba(255,255,255,0.08);">
                         <div>
                             <h3 style="font-size: 1.3rem; color: #FFFFFF;">Junior Web Developer</h3>
-                            <div style="color: #10B981; font-weight: 700; margin-top: 0.2rem; font-size: 0.9rem;">Hana Soft AI Solutions / Hana POS &bull; Coimbatore, India</div>
+                            <div style="color: #34D399; font-weight: 700; margin-top: 0.2rem; font-size: 0.9rem;">Hana Soft AI Solutions / Hana POS &bull; Coimbatore, India</div>
                         </div>
                         <span class="badge">Oct 2025 – Present</span>
                     </div>
 
                     <div class="grid-2">
                         <div class="card" style="padding: 1.15rem; background: #121214;">
-                            <h4 style="color: #10B981; font-size: 0.9rem; margin-bottom: 0.4rem;">Product Catalog Migration</h4>
+                            <h4 style="color: #34D399; font-size: 0.9rem; margin-bottom: 0.4rem;">Product Catalog Migration</h4>
                             <p style="font-size: 0.85rem; color: var(--text-secondary);">Compiled Excel inventory sheets, mapped category tags, and executed catalog migrations for 1,000+ items.</p>
                         </div>
                         <div class="card" style="padding: 1.15rem; background: #121214;">
-                            <h4 style="color: #10B981; font-size: 0.9rem; margin-bottom: 0.4rem;">Website Config & UI Redesign</h4>
+                            <h4 style="color: #34D399; font-size: 0.9rem; margin-bottom: 0.4rem;">Website Config &amp; UI Redesign</h4>
                             <p style="font-size: 0.85rem; color: var(--text-secondary);">Customized storefront layouts, promotional banners, typography sizes, and navigation breakpoint rules.</p>
                         </div>
                         <div class="card" style="padding: 1.15rem; background: #121214;">
-                            <h4 style="color: #10B981; font-size: 0.9rem; margin-bottom: 0.4rem;">E-Commerce Storefront Layouts</h4>
+                            <h4 style="color: #34D399; font-size: 0.9rem; margin-bottom: 0.4rem;">E-Commerce Storefront Layouts</h4>
                             <p style="font-size: 0.85rem; color: var(--text-secondary);">Configured checkout item cards, shopping cart drawers, and seasonal catalog presentations.</p>
                         </div>
                         <div class="card" style="padding: 1.15rem; background: #121214;">
-                            <h4 style="color: #10B981; font-size: 0.9rem; margin-bottom: 0.4rem;">SEO & SSL Diagnostics</h4>
+                            <h4 style="color: #34D399; font-size: 0.9rem; margin-bottom: 0.4rem;">SEO &amp; SSL Diagnostics</h4>
                             <p style="font-size: 0.85rem; color: var(--text-secondary);">Audited site SSL certificates, domain redirects, metadata tags, and zero cumulative layout shifts.</p>
                         </div>
                     </div>
@@ -1004,26 +1004,26 @@
                     <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 0.75rem; margin-bottom: 1.25rem; padding-bottom: 1rem; border-bottom: 1px solid rgba(255,255,255,0.08);">
                         <div>
                             <h3 style="font-size: 1.3rem; color: #FFFFFF;">Network Operations Center (NOC) Engineer</h3>
-                            <div style="color: #F59E0B; font-weight: 700; margin-top: 0.2rem; font-size: 0.9rem;">Reliance Jio Infocomm Ltd &bull; Coimbatore Region</div>
+                            <div style="color: #FBBF24; font-weight: 700; margin-top: 0.2rem; font-size: 0.9rem;">Reliance Jio Infocomm Ltd &bull; Coimbatore Region</div>
                         </div>
                         <span class="badge badge-gold">Telecom Operations</span>
                     </div>
 
                     <div class="grid-2">
                         <div class="card" style="padding: 1.15rem; background: #121214;">
-                            <h4 style="color: #F59E0B; font-size: 0.9rem; margin-bottom: 0.4rem;">Accops Fiber & OLT Telemetry</h4>
+                            <h4 style="color: #FBBF24; font-size: 0.9rem; margin-bottom: 0.4rem;">Accops Fiber &amp; OLT Telemetry</h4>
                             <p style="font-size: 0.85rem; color: var(--text-secondary);">Monitored optical signal variations, OLT port alarms, and optical fiber network links.</p>
                         </div>
                         <div class="card" style="padding: 1.15rem; background: #121214;">
-                            <h4 style="color: #F59E0B; font-size: 0.9rem; margin-bottom: 0.4rem;">SAP Incident Ticket Logging</h4>
+                            <h4 style="color: #FBBF24; font-size: 0.9rem; margin-bottom: 0.4rem;">SAP Incident Ticket Logging</h4>
                             <p style="font-size: 0.85rem; color: var(--text-secondary);">Logged outage tickets (Fiber Cut, OLT Isolation, TECO) in SAP and dispatched repair teams.</p>
                         </div>
                         <div class="card" style="padding: 1.15rem; background: #121214;">
-                            <h4 style="color: #F59E0B; font-size: 0.9rem; margin-bottom: 0.4rem;">Outage Route Dispatch</h4>
+                            <h4 style="color: #FBBF24; font-size: 0.9rem; margin-bottom: 0.4rem;">Outage Route Dispatch</h4>
                             <p style="font-size: 0.85rem; color: var(--text-secondary);">Dispatched restoration coordinates to fiber maintenance teams to restore SLA uptime.</p>
                         </div>
                         <div class="card" style="padding: 1.15rem; background: #121214;">
-                            <h4 style="color: #F59E0B; font-size: 0.9rem; margin-bottom: 0.4rem;">Regional Coverage</h4>
+                            <h4 style="color: #FBBF24; font-size: 0.9rem; margin-bottom: 0.4rem;">Regional Coverage</h4>
                             <p style="font-size: 0.85rem; color: var(--text-secondary);">Monitored optical spans across Coimbatore, Pollachi, Nilgiris, Gudalur, and Mettupalayam.</p>
                         </div>
                     </div>
@@ -1071,11 +1071,11 @@
                     </div>
 
                     <div class="card skill-card reveal stagger-4">
-                        <h3>Tools & Workflow</h3>
+                        <h3>Tools &amp; Workflow</h3>
                         <ul class="skill-list">
                             <li>⚡ Git / GitHub</li>
                             <li>⚡ Chrome DevTools</li>
-                            <li>⚡ VS Code & Postman</li>
+                            <li>⚡ VS Code &amp; Postman</li>
                         </ul>
                     </div>
 
@@ -1119,16 +1119,16 @@
 
                         <div class="mockup-window">
                             <div class="window-bar">
-                                <div>🔴 🟡 🟢</div>
+                                <div aria-hidden="true">🔴 🟡 🟢</div>
                                 <span>florist-storefront.live</span>
                             </div>
                             <div style="padding: 1rem; background: #1E1E24; border-radius: 0.5rem; border: 1px solid rgba(255,255,255,0.06);">
-                                <div style="display: flex; justify-content: space-between; color: #10B981; font-weight: 700; font-size: 0.85rem; margin-bottom: 0.75rem;">
+                                <div style="display: flex; justify-content: space-between; color: #34D399; font-weight: 700; font-size: 0.85rem; margin-bottom: 0.75rem;">
                                     <span>🌸 Fresh Rose Bouquet</span>
                                     <span>$49.99</span>
                                 </div>
-                                <div style="height: 6px; background: rgba(16, 185, 129, 0.25); border-radius: 3px;">
-                                    <div style="width: 85%; height: 100%; background: #10B981; border-radius: 3px;"></div>
+                                <div style="height: 6px; background: rgba(52, 211, 153, 0.25); border-radius: 3px;">
+                                    <div style="width: 85%; height: 100%; background: #34D399; border-radius: 3px;"></div>
                                 </div>
                             </div>
                         </div>
@@ -1151,14 +1151,14 @@
 
                         <div class="mockup-window">
                             <div class="window-bar">
-                                <div>🔴 🟡 🟢</div>
+                                <div aria-hidden="true">🔴 🟡 🟢</div>
                                 <span>blooms-portal.internal</span>
                             </div>
                             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; font-size: 0.8rem;">
-                                <div style="padding: 0.75rem; background: rgba(16, 185, 129, 0.15); border-radius: 0.5rem; color: #10B981; font-weight: 700;">
+                                <div style="padding: 0.75rem; background: rgba(52, 211, 153, 0.15); border-radius: 0.5rem; color: #34D399; font-weight: 700;">
                                     Spring Lilies
                                 </div>
-                                <div style="padding: 0.75rem; background: rgba(245, 158, 11, 0.15); border-radius: 0.5rem; color: #F59E0B; font-weight: 700;">
+                                <div style="padding: 0.75rem; background: rgba(251, 191, 36, 0.15); border-radius: 0.5rem; color: #FBBF24; font-weight: 700;">
                                     Sunflower Pot
                                 </div>
                             </div>
@@ -1204,7 +1204,7 @@
                     </div>
 
                     <div class="card span-3 reveal stagger-1" style="padding: 1.5rem; background: #1E1E24;">
-                        <h3 style="font-size: 1.15rem; margin-bottom: 0.4rem; color: #10B981;">06. Bulk Catalog Migration & Data Compiling</h3>
+                        <h3 style="font-size: 1.15rem; margin-bottom: 0.4rem; color: #34D399;">06. Bulk Catalog Migration &amp; Data Compiling</h3>
                         <p style="color: var(--text-secondary); font-size: 0.88rem;">Compiling inventory spreadsheets, setting up seasonal product categories, linking media assets, and managing database migrations for over 1,000 items.</p>
                     </div>
                 </div>
@@ -1223,26 +1223,26 @@
                 <div class="contact-grid">
                     <div class="reveal-left">
                         <div class="contact-item">
-                            <div class="contact-icon">📧</div>
+                            <div class="contact-icon" aria-hidden="true">📧</div>
                             <div>
-                                <div style="font-size: 0.725rem; color: var(--text-dim); text-transform: uppercase;">Email</div>
-                                <a href="mailto:deepakinbox87@gmail.com" style="color: var(--text-primary); font-weight: 700; text-decoration: none; word-break: break-all;">deepakinbox87@gmail.com</a>
+                                <div style="font-size: 0.725rem; color: var(--text-secondary); text-transform: uppercase; font-weight: 700;">Email</div>
+                                <a href="mailto:deepakinbox87@gmail.com" style="color: var(--text-primary); font-weight: 700; text-decoration: none; word-break: break-all;" aria-label="Send email to deepakinbox87@gmail.com">deepakinbox87@gmail.com</a>
                             </div>
                         </div>
 
                         <div class="contact-item">
-                            <div class="contact-icon">📞</div>
+                            <div class="contact-icon" aria-hidden="true">📞</div>
                             <div>
-                                <div style="font-size: 0.725rem; color: var(--text-dim); text-transform: uppercase;">Phone</div>
-                                <a href="tel:6374268144" style="color: var(--text-primary); font-weight: 700; text-decoration: none;">+91 6374268144</a>
+                                <div style="font-size: 0.725rem; color: var(--text-secondary); text-transform: uppercase; font-weight: 700;">Phone</div>
+                                <a href="tel:6374268144" style="color: var(--text-primary); font-weight: 700; text-decoration: none;" aria-label="Call Deepak M at +91 6374268144">+91 6374268144</a>
                             </div>
                         </div>
 
                         <div class="contact-item">
-                            <div class="contact-icon">💼</div>
+                            <div class="contact-icon" aria-hidden="true">💼</div>
                             <div>
-                                <div style="font-size: 0.725rem; color: var(--text-dim); text-transform: uppercase;">LinkedIn</div>
-                                <a href="https://www.linkedin.com/in/deepak23official/" target="_blank" rel="noopener noreferrer" style="color: #10B981; font-weight: 700; text-decoration: none; word-break: break-all;">linkedin.com/in/deepak23official</a>
+                                <div style="font-size: 0.725rem; color: var(--text-secondary); text-transform: uppercase; font-weight: 700;">LinkedIn</div>
+                                <a href="https://www.linkedin.com/in/deepak23official/" target="_blank" rel="noopener noreferrer" style="color: #34D399; font-weight: 700; text-decoration: none; word-break: break-all;" aria-label="Open Deepak M's LinkedIn Profile">linkedin.com/in/deepak23official</a>
                             </div>
                         </div>
                     </div>
@@ -1274,38 +1274,38 @@
     </main>
 
     <!-- Footer -->
-    <footer style="padding: 2rem 0; text-align: center; border-top: 1px solid rgba(255,255,255,0.06); color: var(--text-dim); font-size: 0.85rem;">
+    <footer style="padding: 2rem 0; text-align: center; border-top: 1px solid rgba(255,255,255,0.08); color: var(--text-secondary); font-size: 0.85rem;">
         <div class="container">
             <p>Deepak M &bull; Junior Web Developer</p>
         </div>
     </footer>
 
     <!-- Resume Modal -->
-    <div class="modal-overlay" id="resume-modal">
+    <div class="modal-overlay" id="resume-modal" role="dialog" aria-modal="true" aria-labelledby="resume-title">
         <div class="modal-body">
-            <button class="close-btn" onclick="closeModal('resume-modal')">&times;</button>
-            <h3 style="font-size: 1.3rem; margin-bottom: 0.75rem; color: #FFFFFF;">Curriculum Vitae</h3>
+            <button class="close-btn" onclick="closeModal('resume-modal')" aria-label="Close modal">&times;</button>
+            <h3 id="resume-title" style="font-size: 1.3rem; margin-bottom: 0.75rem; color: #FFFFFF;">Curriculum Vitae</h3>
             <p style="color: var(--text-secondary); font-size: 0.88rem; margin-bottom: 1.25rem; line-height: 1.6;">
                 <strong>Deepak M</strong> &bull; Junior Web Developer<br>
                 B.Sc Computer Science Graduate<br>
-                Experience: Hana Soft AI Solutions & Reliance Jio Infocomm.
+                Experience: Hana Soft AI Solutions &amp; Reliance Jio Infocomm.
             </p>
             <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
-                <a href="tel:6374268144" class="btn btn-primary" style="flex: 1; font-size: 0.8rem;">Call Candidate</a>
+                <a href="tel:6374268144" class="btn btn-primary" style="flex: 1; font-size: 0.8rem;" aria-label="Call Candidate Deepak M">+91 6374268144</a>
                 <button onclick="closeModal('resume-modal')" class="btn btn-secondary" style="flex: 1; font-size: 0.8rem;">Close</button>
             </div>
         </div>
     </div>
 
     <!-- WhatsApp Confirmation Modal -->
-    <div class="modal-overlay" id="wa-modal">
+    <div class="modal-overlay" id="wa-modal" role="dialog" aria-modal="true" aria-labelledby="wa-title">
         <div class="modal-body" style="text-align: center;">
-            <button class="close-btn" onclick="closeModal('wa-modal')">&times;</button>
-            <h3 style="font-size: 1.25rem; margin-bottom: 0.5rem; color: #10B981;">Message Ready!</h3>
+            <button class="close-btn" onclick="closeModal('wa-modal')" aria-label="Close modal">&times;</button>
+            <h3 id="wa-title" style="font-size: 1.25rem; margin-bottom: 0.5rem; color: #34D399;">Message Ready!</h3>
             <p style="color: var(--text-secondary); font-size: 0.88rem; margin-bottom: 1.25rem;">
                 Your message details have been formatted for instant WhatsApp delivery to Deepak.
             </p>
-            <a id="wa-link" href="#" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="width: 100%;">Open WhatsApp Chat</a>
+            <a id="wa-link" href="#" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="width: 100%;" aria-label="Open WhatsApp Chat">Open WhatsApp Chat</a>
         </div>
     </div>
 
